@@ -1,0 +1,19 @@
+{
+  "name": "electron-edge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "",
+  "keywords": [
+  ],
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "electron": "^1.7.9",
+    "electron-edge-js": "^8.2.9"
+  },
+  "dependencies": {}
+}
