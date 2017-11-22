@@ -5,7 +5,7 @@ Electronが流行りになりそうなならなさそうな感じなので、デ
 
 ## examples
 
-Electron -> React-Redux -> Edge.js => package
+Electron -> React-Redux -> Edge.js -> package
 
 と順を追ってサンプル作成。
 
