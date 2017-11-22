@@ -10,7 +10,7 @@ DLLの呼び出しにはNode.jsと.NETの接続を目的としたライブラリ
 1. Node.jpをいれます（Nodistでverを変えれるようにしておきましょう）
 2. ``` cd [プロジェクトフォルダ] ```
 3. ``` npm init ```
-4. ``` npm install -D electron1.7.9 ```
+4. ``` npm install -D electron@1.7.9 ```
 5. ``` npm install -D electron-edge-js@8.2.9 ```
 
 Electronは環境インストール済みのNode.jsとは関係なく、verによってそれぞれ特定のNode.jsで駆動しています。  
