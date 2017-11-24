@@ -13,10 +13,9 @@ DLLの呼び出しにはNode.jsと.NETの接続を目的としたライブラリ
 4. ``` npm install -D electron@1.7.9 ```
 5. ``` npm install -D electron-edge-js@8.2.9 ```
 
-Electronは環境インストール済みのNode.jsとは関係なく、verによってそれぞれ特定のNode.jsで駆動しています。  
-Edge.jsも同様で、同時に使用するためにはElectronとEdge.jsで使用されているNode.jsのverを合わせる必要があります。
+ElectronやEdge.jsは環境インストール済みのNode.jsとは関係なく、verによってそれぞれ特定のNode.jsで駆動しています。同時に使用するためにはElectronとEdge.jsで使用されているNode.jsのverを合わせる必要があります。
 
-そこで、Electron用のEdge.jsとしてelectron-edgeがありますが、各Electronのverにあわせてbuildされたelectron-edge-jsがあったのでそっち使いました。
+そこで、Electron用のEdge.jsとしてelectron-edgeがありますが、各Electronのverにあわせてbuildされたelectron-edge-jsがあったのでそちらを使用しています。
 
 ## Electronの基礎
 
