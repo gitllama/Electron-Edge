@@ -16,8 +16,7 @@
     ]
   },
   "scripts": {
-    "start": "electron .",
-    "build": "electron-packager . electron_test --platform darwin --arch x64"
+    "start": "electron ."
   },
   "dependencies": {
     "babel-preset-es2015": "^6.5.0",
