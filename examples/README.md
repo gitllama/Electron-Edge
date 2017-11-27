@@ -17,13 +17,17 @@ ElectronやEdge.jsは環境インストール済みのNode.jsとは関係なく�
 
 そこで、Electron用のEdge.jsとしてelectron-edgeがありますが、各Electronのverにあわせてbuildされたelectron-edge-jsがあったのでそちらを使用しています。
 
+-D(--save-dev)オプションは--saveでも。適宜。
+
 ## Electronの基礎
 
 ### 構成
 
 決まり文句。
 
-```npm start```でとりあえず動いてくれる
+```npm start```でとりあえず動いてくれる  
+dependencies, devDependenciesのものは自動的にPATHが通るので。
+
 
 package.json
 ```
@@ -147,6 +151,19 @@ sample1('World', (error, result)=>{
 ```
 
 ```edge.func```でC#の構文を呼び出すのですが、当然Node.jsはC#の構文を解釈しないのでご解釈を避ける為```/**/```で囲まれているところがポイント。
+
+ES6なら
+
+```javascript
+var edge = require('edge');
+var helloWorld = edge.func(`
+    async (input) => { 
+        return ".NET Welcomes " + input.ToString(); 
+    }
+`);
+```
+
+とかける。
 
 ### DLL呼び出し
 
