@@ -1,7 +1,6 @@
-//Action
+//Action & Action Creator
 const INCREMENT = 'INCREMENT';
 
-//Action Creator
 export function increment() {
   return {
     type: INCREMENT
