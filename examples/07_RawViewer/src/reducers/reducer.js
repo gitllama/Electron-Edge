@@ -5,6 +5,7 @@ import { fetchDecord } from './sagas'
 
 const defaultState = require('../config.json');
 
+
 const initialState = Immutable.Map({
   imagedata : null,
   width : defaultState.width,
@@ -14,7 +15,8 @@ const initialState = Immutable.Map({
   offset :  defaultState.offset,
   type :  defaultState.type,
   file : {name :"null"},
-  onload : false
+  onload : false,
+  redraw : false
 });
 
 //ReadとChangeから自動的にDecordに伝播しなければならん

@@ -42,3 +42,9 @@ export function onload (val){
     value: val
   };
 }
+export function redraw (val){
+  return {
+    type: 'REDRAW',
+    value: val
+  };
+}
