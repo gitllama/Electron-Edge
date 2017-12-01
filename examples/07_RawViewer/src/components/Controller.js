@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as actions from '../action'
+import actions from '../actions/action'
 
 const labelStyle = {
   display:"block",
@@ -20,16 +20,16 @@ class App extends React.Component {
     this.onChangeType = this.onChangeType.bind(this);
   }
   onChange() {
-    this.props.actions.changeparam({
+    this.props.actions.changeParams({
       bitshift : this.bitshift.value,
       offset : this.offset.value
     });
   }
   onChangeSize() {
-    this.props.actions.changesize(this.size.value);
+    this.props.actions.changeSize(this.size.value);
   }
   onChangeType() {
-    this.props.actions.changetype(this.type.value);
+    this.props.actions.changeType(this.type.value);
   }
   render() {
     return (

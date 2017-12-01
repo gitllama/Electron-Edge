@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import SplitPane from 'react-split-pane';
-import * as actions from '../action'
+import * as actions from '../actions/action'
 
 import Cnv from './Cnv';
 import Controller from './Controller';
