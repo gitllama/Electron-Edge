@@ -42,11 +42,16 @@ containers使用してますが冗長ですね...
 
 Edge.jsのスクリプトを実行します。
 
-Redux-Sagaでの非同期、ipcとの共存etc...
+- Redux-Sagaでの非同期
+- ipcとの共存
+- ショートカット
+- bindActionCreators
 
 ## 07_RawViewer
 
 Edge.jsを使用したバイナリのやり取り。
+
+- redux-actions
 
 ## 参考
 
