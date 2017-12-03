@@ -1,0 +1,9 @@
+{
+  "global" : {
+    "ctrl+u" : "SHORTCUT_INC",
+    "ctrl+i" : "SHORTCUT_INC"
+  },
+  "main" : {
+
+  }
+}

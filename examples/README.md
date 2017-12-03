@@ -9,7 +9,7 @@ DLLの呼び出しにはNode.jsと.NETの接続を目的としたライブラリ
 
 ## 準備
 
-1. Node.jpをいれます（Nodistでverを変えれるようにしておきましょう）
+1. Node.jpをいれます
 2. ``` cd [プロジェクトフォルダ] ```
 3. ``` npm init ```
 4. ``` npm install -D electron@1.7.9 ```
@@ -20,6 +20,13 @@ ElectronやEdge.jsは環境インストール済みのNode.jsとは関係なく�
 そこで、Electron用のEdge.jsとしてelectron-edgeがありますが、各Electronのverにあわせてbuildされたelectron-edge-jsがあったのでそちらを使用しています。
 
 -D(--save-dev)オプションは--saveでも。適宜。
+
+** Nodistでverを変えれるようにする場合 **
+
+1. Nodistをいれます
+2. ``` nodist dist ``` Ver確認
+3. ``` nodist [ver no] ```
+4. ``` nodist npm match ```
 
 ## 01_ElectronEdge
 
@@ -42,16 +49,23 @@ containers使用してますが冗長ですね...
 
 Edge.jsのスクリプトを実行します。
 
-- Redux-Sagaでの非同期
+- 非同期
 - ipcとの共存
 - ショートカット
 - bindActionCreators
 
-## 07_RawViewer
+## 07_ElectronReactReduxImmutableSaga
+
+- redux-actions
+- Redux-Sagaでの非同期戦略
+- ショートカット、メニューとActionの接続
+
+## 08_RawViewer
 
 Edge.jsを使用したバイナリのやり取り。
 
 - redux-actions
+- Redux-Sagaでの非同期
 
 ## 参考
 

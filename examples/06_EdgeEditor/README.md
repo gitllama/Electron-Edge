@@ -6,7 +6,8 @@ Electronはディスクトップアプリなので、メインプロセスとレ
 
 メインプロセスとレンダープロセスの通信としてipcMain-ipcRendererが用意されているわけですが。Reduxを使用した場合は処理がreducerに集約されるので、両立するためには一工夫必要となります。
 
-その際のTips。
+1. ipc2reducer
+1. 非同期(Redux-Saga)
 
 ### 1. ipc2reducer
 
@@ -76,12 +77,7 @@ ipcMain.on('ping', (event, ...args) => {
 });
 ```
 
-### 2. ショートカット / メニュー
-
-メインプロセスのelectron.globalShortcutとkeymasterのようなレンダープロセスでのショートカット制御が混在します。  
-また、メニューもメインプロセスから追い出したいところ。
-
-### 3. 非同期
+### 2. 非同期
 
 どこに非同期をおしつけるか。React-Reduxのやり方としては主に3つ。
 
@@ -114,20 +110,30 @@ middlewareとしてredux-thunkを使用します。
 
 #### C. Saga
 
-middlewareとしてredux-sagaを使用します。
-
-Sagaを使用するにはジェネレータ関数を使用する必要がありますが、Babel的には
-
-- babel-plugin-transform-regenerator
-- babel-plugin-transform-runtime
-
-と
+middlewareとしてredux-sagaを使用します。sagaは通常の
 
 ```
-"plugins": [
-  "transform-regenerator",
-  "transform-runtime"
-]
+Action -> Reducer -> state
 ```
 
-の指定が必要
+というフローに対して、次のようなフローを追加して非同期を実現します
+
+```
+Action ┬-----------------┬>Reducer -> state
+       └> Saga -> Action ┘
+```
+
+Sagaを使用するにはジェネレータ関数を使用する必要があります。Babel的には一例としてpackage.jsonに以下を追加してinstallすることで動作環境を作れます。
+
+```
+"babel": {
+  "plugins": [
+    "transform-regenerator",
+    "transform-runtime"
+  ]
+},
+"dependencies": {
+  "babel-plugin-transform-regenerator": "^6.26.0",
+  "babel-plugin-transform-runtime": "^6.23.0"
+}
+```

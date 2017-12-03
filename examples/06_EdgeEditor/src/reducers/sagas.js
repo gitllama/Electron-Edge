@@ -33,12 +33,7 @@ export function* rootSaga() {
 }
 */
 
-//take : アクションを待ち受ける
-//select : stateを取得
-//fork : sagaを並列に実行(別のタスクを開始)
-//put : Actionをdispatch
-//call : Promiseの完了を待つ
-//join: 別のタスクの終了を待つ
+
 
 /*
 USER_FETCH_REQUESTED Action が送出されるたびに fetchUser を起動します。

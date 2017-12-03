@@ -7,9 +7,13 @@ const BrowserWindow = electron.BrowserWindow;
 
 var mainWindow;
 
-//コマンドラインオプションの確認
-//app.on('ready')に書かないと出力が奪われてコンソールにでない
-console.log('args: ', process.argv);
+//コマンドラインオプションの確認, ready前に書かないとコンソール持ってかれる
+if(process.argv.indexOf('-H') > 0)
+  console.log(`
+    Help
+     -H : Help
+     -D : DevTools
+  `);
 
 app.on('ready', function() {
     mainWindow = new BrowserWindow({
@@ -26,6 +30,7 @@ app.on('ready', function() {
     }));
     installMenu();
 
+    //コマンドラインオプションの確認
     if(process.argv.indexOf('-D') > 0)
       mainWindow.webContents.openDevTools();
 
