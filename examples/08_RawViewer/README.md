@@ -130,15 +130,59 @@ JavaScript -> C#
 
 |引数|結果|note|
 |:--|:--|:--|
-|ImageData|×||
-|Uint8ClampedArray|×|ImageData内部の画像データ部
+|配列|object[]||
+|Int32Array|Dynamic.ExpandoObject||
+|Uint8ClampedArray|Dynamic.ExpandoObject|ImageData内部の画像データ部
+|ImageData|Dynamic.ExpandoObject||
 
 JavaScript -> C#
 
 |引数|結果|note|
 |:--|:--|:--|
-|char[]|x| |
-|byte[]|Uint8Array|.|
+|char[]|配列['\u0000','\u0000']|ImageDataにはそのまま入らない|
+|int[]|配列[0,0]|ImageDataにはそのまま入らない|
+|byte[]|Buffer配列 <Buffer 00 00>|ImageDataに入る|
+|Dictionary<>|連想配列{key:val}|.|
+
+Uint8ClampedArrayはDynamic.ExpandoObjectでやり取りされるので以下のような形で書き換えを実行できる。ただ、参照を渡しているわけではないので元オブジェクトの値が変更されるわけではない
+
+```javascript
+let code = edge.func(`
+  using System;
+  using System.IO;
+  using System.Threading.Tasks;
+  using System.Collections.Generic;
+  using System.Dynamic;
+  public class Startup
+  {
+    public async Task<object> Invoke(object input)
+    {
+      var i = ((IDictionary<string, Object>)input);
+      i["1"] = 20;
+      return i;
+    }
+  }
+`);
+code(new Uint8ClampedArray(10), (error, result)=>{
+    console.log(result);
+});
+```
+
+また、C#からExpandoObjectで戻り値を作成することもできるので
+
+```C#
+Dictionary<string, object> dic = new Dictionary<string, object>();
+dic.Add("Int32", new int[10]);
+dic.Add("Byte", new byte[10]);
+dic.Add("Float", new float[10]);
+dic.Add("Char", new char[10]);
+return dic;
+
+dynamic data = new ExpandoObject();
+data.key = "a";
+data.InputFromNode = input;
+return data;
+```
 
 ## JavaScriptでのロジック
 
