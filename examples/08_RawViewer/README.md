@@ -180,6 +180,12 @@ data.InputFromNode = input;
 return data;
 ```
 
+参照渡しやメモリマップドファイルのような機能をnode.jsから使用するのは筋が悪いので、
+
+javascirpt配列/連想配列 -> C#配列/連想配列 -> javascirpt配列 -> Uint8ClampedArray
+
+の様な変換となるように留意する方がよさそう
+
 ## JavaScriptでのロジック
 
 JavaScriptでは型固定でないので、bitshift演算部で想定外の演算が起こることがあります（というかおこった）
