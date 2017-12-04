@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import SplitPane from 'react-split-pane';
+import actions from '../actions'
 
 import Cnv from './Cnv';
 import Controller from './Controller';
@@ -48,14 +49,6 @@ const RightStyle = {
 
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    // const ipcRenderer = require("electron").ipcRenderer;
-    // ipcRenderer.on('runEdge', (event, param) => {
-    //   store.dispatch(runEdge(store.getState().get("input")));
-    // });
-
-  }
   render() {
     return (
       <SplitPane split="vertical" defaultSize="50%"

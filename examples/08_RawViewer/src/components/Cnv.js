@@ -48,7 +48,5 @@ class App extends React.Component {
 
 export default connect(
   state => ({state}),
-  dispatch =>({
-      actions: bindActionCreators(actions, dispatch)
-  })
+  dispatch =>({ actions: bindActionCreators(actions, dispatch) })
 )(App)

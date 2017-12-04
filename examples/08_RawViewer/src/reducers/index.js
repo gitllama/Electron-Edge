@@ -1,9 +1,9 @@
 import Immutable from 'immutable';
-const defaultState = require('../config.json');
+const defaultState = require('../../config.json');
 
 const initialState = Immutable.Map({
   imagedata : null,
-  rawdata : new Int32Array(defaultState.width * defaultState.height),
+  rawdata : null,
   width : defaultState.width,
   height : defaultState.height,
   size :  defaultState.size,
@@ -17,9 +17,15 @@ const initialState = Immutable.Map({
   filename : null,
 });
 
-export function reducer(state = initialState, action) {
-  console.log("Action :", action.type)
-  return 'REDUCER_CHANGE' === action.type
-    ?  action.payload(state)
+const reducers = {
+  ['REDUCER_CHANGE'] : (state, action) => (
+    action.payload(state)
+  )
+};
+
+export default function reducer(state = initialState, action) {
+  console.log("reducer", action.type)
+  return reducers[action.type]
+    ? reducers[action.type](state, action)
     : state;
 }
