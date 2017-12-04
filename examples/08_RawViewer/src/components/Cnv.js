@@ -9,6 +9,7 @@ class App extends React.Component {
     super(props);
   }
   componentDidMount() {
+    //D&D設定
     this.node.ondragover =()=> false;
     this.node.ondragleave = this.node.ondragend = () => false;
 
@@ -19,7 +20,28 @@ class App extends React.Component {
       return false;
     }).bind(this);
 
-    this.props.actions.reflashAsync(); //初期値強制再描画
+    //座標の表示
+    this.node.addEventListener("mousemove", function(e){
+
+    })
+    this.node.addEventListener("mousedown", (e)=>{
+      var rect = e.target.getBoundingClientRect();
+      let width = this.props.state.get('width');
+      let height = this.props.state.get('height');
+      let size = this.props.state.get('size');
+
+      var x = Math.floor((e.clientX - rect.left)/size);
+      var y = Math.floor((e.clientY - rect.top)/size);
+
+      x = x < 0 ? 0 : x > width ? width : x
+      y = y < 0 ? 0 : y > height ? width : y
+
+      let pix = this.props.state.get('rawdata')[x + y * width];
+      console.log(x, y, pix);
+    });
+
+    //初期値強制再描画
+    this.props.actions.reflashAsync();
   }
   shouldComponentUpdate(nextProps){
     //変更時のみrenderingロジックが走る

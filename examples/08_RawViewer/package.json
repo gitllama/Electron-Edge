@@ -1,12 +1,13 @@
 {
-  "name": "a",
+  "name": "RawViewer",
   "version": "1.0.0",
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron . -D",
-    "build": "node_modules/.bin/electron-packager.cmd . sample --platform=win32 --arch=all --version=1.7.9"
+    "start": "electron . -D"
   },
+  "repository": "",
+  "keywords": [],
   "author": "",
   "license": "",
   "babel": {
@@ -20,27 +21,24 @@
       "transform-runtime"
     ]
   },
-  "devDependencies": {},
-  "dependencies": {
+  "devDependencies": {
     "babel-plugin-transform-regenerator": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-3": "^6.24.1",
     "babel-register": "^6.26.0",
-    "edge": "^7.10.1",
     "electron": "^1.7.9",
     "electron-edge-js": "^8.2.9",
     "electron-packager": "^10.1.0",
     "immutable": "^3.8.2",
-    "keymaster": "^1.6.2",
-    "marked": "^0.3.6",
     "react": "^16.1.1",
-    "react-ace": "^5.7.0",
+    "react-action": "^1.0.0",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
     "react-split-pane": "^0.1.71",
     "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
     "redux-saga": "^0.16.0"
-  }
+  },
+  "dependencies": {}
 }

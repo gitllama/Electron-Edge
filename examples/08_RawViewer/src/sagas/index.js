@@ -113,7 +113,7 @@ function readfile(params){
     case 'DLL':
       return new Promise((resolve, reject) => {
         try{
-          let hoge = edge.func(`
+          let code = edge.func(`
             using System;
             using System.IO;
             using System.Threading.Tasks;
@@ -133,8 +133,9 @@ function readfile(params){
               }
             }
           `);
-          hoge(params.file.path, (error, result)=>{
+          code(params.file.path, (error, result)=>{
               if (error) throw error;
+              console.log(result)
               resolve(result);
           });
         }catch(e){
@@ -162,7 +163,7 @@ function decord(params){
     case 'DLL':
       return new Promise((resolve, reject) => {
         try{
-          let hoge = edge.func(`
+          let code = edge.func(`
             using System;
             using System.IO;
             using System.Threading.Tasks;
@@ -185,7 +186,7 @@ function decord(params){
               }
             }
           `);
-          hoge(params, (error, result)=>{
+          code(params, (error, result)=>{
               if (error) throw error;
               let hoge = Uint8ClampedArray.from(result);
               let dst = new ImageData(hoge, params.width, params.height);
