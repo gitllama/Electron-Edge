@@ -1,9 +1,5 @@
 # RawViewer
 
-## future
-
-ショートカットのjsonへのきりだし
-
 ## redux-actions
 
 redux-actionsでFSA(Flux Standard Action)ガイドラインに沿ったつくりにします
