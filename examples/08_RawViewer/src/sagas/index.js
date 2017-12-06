@@ -2,7 +2,7 @@ import { call, put, take, select, fork, takeEvery, takeLatest } from 'redux-saga
 import actions from '../actions';
 import Immutable from 'immutable';
 import edge from 'electron-edge-js';
-
+import {getPngChunkData, getPngChunkString} from './PreviewableRaw';
 //saga monitor
 
 export default function* rootSaga() {
@@ -27,7 +27,6 @@ function* setTake(actionName, callback) {
     );
   }
 }
-
 
 const takeSagas = {
   ['READ_FILE_ASYNC'] : readfileasync,
@@ -143,6 +142,19 @@ function readfile(params){
         }
       });
       break;
+    case 'RAWPNG':
+      return new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        reader.onload = function(evt){
+          let json = JSON.parse(getPngChunkString(evt.target.result, "raWh"))
+          let dst = getPngChunkData(evt.target.result, "raWd");
+          dst = conv[json.type](dst);
+          dst = dst.map((x)=> Math.floor(x));
+          resolve(dst);
+        }
+        reader.readAsArrayBuffer(params.file);
+      });
+    break;
     default:
       return new Promise((resolve, reject) => {
         let reader = new FileReader();

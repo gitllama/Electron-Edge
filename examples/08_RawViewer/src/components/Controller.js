@@ -50,6 +50,7 @@ class App extends React.Component {
                 value={this.props.state.get('type')}>
                 <option value="Int32">Int32</option>
                 <option value="Float32">Float32</option>
+                <option value="RAWPNG">RAWPNG</option>
                 <option value="DLL">DLL</option>
               </select>
             </li>
