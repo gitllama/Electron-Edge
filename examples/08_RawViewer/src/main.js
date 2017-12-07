@@ -3,6 +3,7 @@ const url = require('url');
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const Dialog = electron.dialog;
 
 var mainWindow;
 
@@ -63,6 +64,18 @@ function installMenu() {
     {
       label: 'Menu',
       submenu: [
+        {
+          label: 'Export CSV',
+          click () {
+            Dialog.showSaveDialog(null, {
+                title: 'Save',
+                defaultPath: '.',
+                filters: [
+                    {name: 'CSV', extensions: ['csv']}
+                ]
+            }, (savedFiles) => { mainWindow.webContents.send("exportCSV",savedFiles); });
+          }
+        },
         {
           label: 'Exit',
           accelerator: 'Ctrl+Q',

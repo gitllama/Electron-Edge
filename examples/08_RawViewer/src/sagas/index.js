@@ -3,6 +3,7 @@ import actions from '../actions';
 import Immutable from 'immutable';
 import edge from 'electron-edge-js';
 import {getPngChunkData, getPngChunkString} from './PreviewableRaw';
+
 //saga monitor
 
 export default function* rootSaga() {
@@ -31,13 +32,12 @@ function* setTake(actionName, callback) {
 const takeSagas = {
   ['READ_FILE_ASYNC'] : readfileasync,
   ['REFLASH_ASYNC'] : reflashasync,
-  ['CHANGE_PARAMS_ASYNC'] : changeparamsasync,
 
   ['CHANGE_PARAMS'] : (state, action) => (
     state.withMutations(m => {
       m.set('bitshift', action.payload.bitshift)
        .set('offset', action.payload.offset)
-       .set('params', Immutable.Map(action.payload))
+       // .set('params', Immutable.Map(action.payload))
     })
   ),
   ['CHANGE_SIZE'] : (state, action) => (
@@ -50,6 +50,15 @@ const takeSagas = {
       m.set('type', action.payload)
     ))
   ),
+  ['WRITE_MESSAGE'] : (state, action) => (
+    state.withMutations(m => (
+      m.set('message', action.payload)
+    ))
+  ),
+  ['EXPORT_CSV'] : (state, action) => {
+    writeCSV(action.payload, state.get('rawdata'), state.get('width'), state.get('height'))
+    return state;
+  },
 };
 
 function* readfileasync(action){
@@ -73,8 +82,6 @@ function* reflashasync(action){
     bitshift : state.get('bitshift'),
     offset : state.get('offset')
   }
-  if(params.rawdata == null)
-    params.rawdata = new Int32Array(params.width * params.height);
   let dst = yield call(decord, params);
   yield put(actions.reducerChange(state=>(
     state.withMutations(m => (
@@ -83,28 +90,16 @@ function* reflashasync(action){
   )));
 }
 
-function* changeparamsasync(action){
-  yield put(actions.reducerChange(state=>(
-    state.withMutations(m => (
-      m.set('bitshift', action.payload.bitshift)
-      .set('offset', action.payload.offset)
-      .set('params', Immutable.Map(action.payload))
-    ))
-  )));
-  let dst = yield call(decord, action.payload);
-  yield put(actions.reducerChange(state=>(
-    state.withMutations(m => (
-      m.set('imagedata', dst)
-    ))
-  )));
-}
-
-
-
 //Logic
 const conv = {
+  ["Int8"] : (e) => new Int8Array(e),
+  ["UInt8"] : (e) => new UInt8Array(e),
+  ["Int16"] : (e) => new Int16Array(e),
+  ["Uint16"] : (e) => new Uint16Array (e),
   ["Int32"] : (e) => new Int32Array(e),
+  ["Uint32"] : (e) => new Uint32Array (e),
   ["Float32"] : (e) => new Float32Array(e),
+  ["Float64"] : (e) => new Float64Array(e),
 }
 
 function readfile(params){
@@ -238,4 +233,21 @@ function decord(params){
       });
       break;
   }
+}
+
+function writeCSV(path, content, w, h){
+  let formatCSV = "";
+  for (var y = 0; y < h; y++) {
+    for (var x = 0; x < w; x++) {
+      formatCSV += `${content[x + y * w]}, `;
+    }
+    formatCSV += '\n';
+  }
+  fs.writeFile(path, formatCSV, 'utf8', function (err) {
+    if (err) {
+      console.log('export err');
+    } else {
+      console.log('export success');
+    }
+  });
 }

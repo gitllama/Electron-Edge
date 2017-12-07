@@ -40,46 +40,66 @@ class App extends React.Component {
   render() {
     return (
       <div style={this.props.style}>
-        <form>
-          <ul style={{ListStyleType: 'none'}}>
-            <li>
-              <label style={labelStyle}>FileType : </label>
+        <table>
+        <tbody>
+          <tr>
+            <td style={labelStyle}>FileType : </td>
+            <td>
               <select style={inputStyle}
                 onChange={this.onChangeType}
                 ref={node => this.type = node}
                 value={this.props.state.get('type')}>
+                <option value="Int8">Int32</option>
+                <option value="UInt8">Float32</option>
+                <option value="Int16">Int32</option>
+                <option value="Uint16">Float32</option>
                 <option value="Int32">Int32</option>
-                <option value="Float32">Float32</option>
+                <option value="Uint32">Float32</option>
+                <option value="Float32">Int32</option>
+                <option value="Float64">Float32</option>
                 <option value="RAWPNG">RAWPNG</option>
                 <option value="DLL">DLL</option>
               </select>
-            </li>
-            <li>
-              <label style={labelStyle}>bitshift : </label>
+            </td>
+          </tr>
+          <tr>
+            <td style={labelStyle}>bitshift : </td>
+            <td>
               <input style={inputStyle} type="number"
                 value={this.props.state.get('bitshift')}
                 ref={node => this.bitshift = node}
                 onChange={this.onChange}
                 />
-            </li>
-            <li>
-              <label style={labelStyle}>offset : </label>
+            </td>
+          </tr>
+          <tr>
+            <td style={labelStyle}>offset : </td>
+            <td>
               <input style={inputStyle} type="number"
                 value={this.props.state.get('offset')}
                 ref={node => this.offset = node}
                 onChange={this.onChange}
                 />
-            </li>
-            <li>
-              <label style={labelStyle}>size : </label>
+            </td>
+          </tr>
+          <tr>
+            <td style={labelStyle}>size : </td>
+            <td>
               <input style={inputStyle} type="number"
                 value={this.props.state.get('size')}
                 ref={node => this.size = node}
                 onChange={this.onChangeSize}
                 />
-            </li>
-          </ul>
-        </form>
+            </td>
+          </tr>
+          <tr>
+            <td style={labelStyle}>Output : </td>
+            <td>
+              {this.props.state.get('message')}
+            </td>
+          </tr>
+        </tbody>
+        </table>
       </div>
     );
   }

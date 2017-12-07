@@ -3,14 +3,14 @@ const defaultState = require('../../config.json');
 
 const initialState = Immutable.Map({
   imagedata : null,
-  rawdata : null,
+  rawdata : new Int32Array(defaultState.width * defaultState.height),
   width : defaultState.width,
   height : defaultState.height,
   size :  defaultState.size,
-  params : Immutable.Map({
-    bitshift :  defaultState.bitshift,
-    offset :  defaultState.offset,
-  }),
+  // params : Immutable.Map({
+  //   bitshift :  defaultState.bitshift,
+  //   offset :  defaultState.offset,
+  // }),
   bitshift :  defaultState.bitshift,
   offset :  defaultState.offset,
   type :  defaultState.type,
@@ -24,7 +24,7 @@ const reducers = {
 };
 
 export default function reducer(state = initialState, action) {
-  console.log("reducer", action.type)
+  console.log(`Action : ${action.type}`)
   return reducers[action.type]
     ? reducers[action.type](state, action)
     : state;

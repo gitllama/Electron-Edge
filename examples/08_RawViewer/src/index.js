@@ -19,7 +19,9 @@ for(let key in registerShortcut["global"]){
     store.dispatch({type: param});
   });
 }
-
+ipcRenderer.on("exportCSV", (event, param) => {
+  store.dispatch({type: "EXPORT_CSV", payload : param});
+});
 
 ReactDOM.render(
   <Provider store={store}>

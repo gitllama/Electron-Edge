@@ -37,7 +37,7 @@ class App extends React.Component {
       y = y < 0 ? 0 : y > height ? width : y
 
       let pix = this.props.state.get('rawdata')[x + y * width];
-      console.log(x, y, pix);
+      this.props.actions.writeMessage(`(${x},${y}):${pix}`);
     });
 
     //初期値強制再描画
