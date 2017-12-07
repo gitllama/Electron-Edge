@@ -15,14 +15,28 @@ Electronはディスクトップアプリなので、メインプロセスとレ
 
 ```javascript
 const ipcMain = electron.ipcMain;
-ipcMain.on("click-my-button", (sender, e) => {
+//受け(from send)
+ipcMain.on("click-my-button", (event, e) => {
     console.log(e);
+    event.sender.send('reply', 'pong');//送り
+    
 });
+//受け(from sendsync)
+ipcMain.on('sync-message', (event, arg) => {
+  console.log(arg)
+  event.returnValue = 'pong';//送り
+})
 ```
 
 ```javascript
 const ipcRenderer = require("electron").ipcRenderer;
+//送り
 ipcRenderer.send("click-my-button", ++clickCount);
+const result = ipcRenderer.sendSync("click-my-button", ++clickCount);
+//受け
+ipcRenderer.on('reply', (event, arg) => {
+    console.log(arg)
+})
 ```
 
 #### 直書き
