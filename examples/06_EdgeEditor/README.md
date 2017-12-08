@@ -90,19 +90,22 @@ require('electron').remote.getCurrentWindow().on('close', () => {
 ```javascript
 // renderer process
 const hoge = require('electron').remote.require('../main/main')
-const a = hoge.withRendererCallback(x => x + 1) //[undefined, undefined, undefined]
-const b = hoge.withLocalCallback() //[2, 3, 4]
+const a = hoge.a(x => x + 1) //[undefined, undefined, undefined]
+const b = hoge.b() //[2, 3, 4]
+hoge.c(10)
 ```
 
 ```javascript
 // main process
 let count = 0
-exports.withRendererCallback = (mapper) => {
-  count = 0;//mainの変数は変更できる
+exports.a = (mapper) => {
   return [1, 2, 3].map(mapper)
 }
-exports.withLocalCallback = () => {
+exports.b = () => {
   return [1, 2, 3].map(x => x + 1)
+}
+exports.c = (e) => {
+  count = e;//mainの変数は変更できる
 }
 ```
 
