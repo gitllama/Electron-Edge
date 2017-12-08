@@ -1,0 +1,12 @@
+{
+  "interval" : 10000,
+  
+  "shortcut" :{
+    "global" : {
+      "ctrl+u" : "COMMAND_MESSAGE"
+    },
+    "main" : {
+
+    }
+  }
+}
