@@ -39,7 +39,7 @@ ipcRenderer.on('reply', (event, arg) => {
 })
 ```
 
-#### 直書き
+#### webContents.send
 
 1. ipcRendererからstore.dispatch呼び出し登録
 2. ```mainWindow.webContents.send```でメインプロセスからipc呼び出し
@@ -68,6 +68,14 @@ ipcRenderer.on('my-menu', (event, param) => {
 });
 ```
 
+#### remote
+
+レンダーでメインプロセスの関数を呼び出す
+
+```javascript
+const BrowserWindow = require('electron').remote.BrowserWindow
+```
+
 #### redux-electron-ipc
 
 ライブラリのredux-electron-ipcを使用する場合
@@ -90,6 +98,10 @@ ipcMain.on('ping', (event, ...args) => {
   event.sender.send('pong', ...args);
 });
 ```
+
+
+
+
 
 ### 2. 非同期
 
