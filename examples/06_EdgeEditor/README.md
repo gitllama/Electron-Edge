@@ -70,11 +70,46 @@ ipcRenderer.on('my-menu', (event, param) => {
 
 #### remote
 
+レンダーでメインプロセス用の関数を呼び出す
+
+```javascript
+const {BrowserWindow} = require('electron').remote
+let win = new BrowserWindow({width: 800, height: 600})
+win.loadURL('https://github.com') //新規ウインドウ発生
+```
+
+```javascript
+require('electron').remote.getCurrentWindow().on('close', () => {
+  // window was closed...
+  // mainがGCするまで残るのでエラーの元
+})
+```
+
 レンダーでメインプロセスの関数を呼び出す
 
 ```javascript
-const BrowserWindow = require('electron').remote.BrowserWindow
+// renderer process
+const hoge = require('electron').remote.require('../main/main')
+const a = hoge.withRendererCallback(x => x + 1) //[undefined, undefined, undefined]
+const b = hoge.withLocalCallback() //[2, 3, 4]
 ```
+
+```javascript
+// main process
+let count = 0
+exports.withRendererCallback = (mapper) => {
+  count = 0;//mainの変数は変更できる
+  return [1, 2, 3].map(mapper)
+}
+exports.withLocalCallback = () => {
+  return [1, 2, 3].map(x => x + 1)
+}
+```
+
+ただし、
+
+1. デッドロック対策で非同期でしか動かない（ので
+1. コールバックはmainがGCするまで存在する
 
 #### redux-electron-ipc
 
@@ -98,10 +133,6 @@ ipcMain.on('ping', (event, ...args) => {
   event.sender.send('pong', ...args);
 });
 ```
-
-
-
-
 
 ### 2. 非同期
 
