@@ -11,7 +11,7 @@ var mainWindow;
 //app.on('ready')に書かないと出力が奪われてコンソールにでない
 console.log('args: ', process.argv);
 
-app.on('ready', function() {
+function createWindow () {
     mainWindow = new BrowserWindow({
       width: 800,
       height: 600,
@@ -36,6 +36,8 @@ app.on('ready', function() {
     setShortcut();
 
 });
+
+app.on('ready', createWindow)
 
 app.on('window-all-closed', function() {
     if (process.platform !== 'darwin') {
