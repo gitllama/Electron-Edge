@@ -15,7 +15,7 @@ if(process.argv.indexOf('-H') > 0)
      -D : DevTools
   `);
 
-app.on('ready', function() {
+function createWindow () {
     mainWindow = new BrowserWindow({
       width: 800,
       height: 600,
@@ -42,6 +42,8 @@ app.on('ready', function() {
     setShortcut();
 
 });
+
+app.on('ready', createWindow)
 
 app.on('window-all-closed', function() {
     if (process.platform !== 'darwin') {
