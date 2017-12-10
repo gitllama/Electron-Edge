@@ -1,7 +1,8 @@
 import { createActions } from 'redux-actions';
 
 export default createActions(
-  'REDUCER_CHANGE',
+  'STATE_CHANGE',
+  'STATE_INC',
 
   'COMMAND_MESSAGE',
 );

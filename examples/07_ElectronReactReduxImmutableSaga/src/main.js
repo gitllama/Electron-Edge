@@ -59,7 +59,7 @@ app.on('activate', function() {
 function installMenu() {
   const Menu = electron.Menu;
   // Win/Macではkeyが違うので
-  // if(process.platform == 'darwin') で分ける必要あり
+  // if(process.platform == 'darwin') で分けるかCommandOrControl+Xのような書き方
   // 追加はmainWindow.setMenu(menu);
   Menu.setApplicationMenu(Menu.buildFromTemplate([
     {

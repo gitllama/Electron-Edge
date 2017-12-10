@@ -1,8 +1,8 @@
 {
-  "name": "electron-edge",
+  "name": "Widget",
   "version": "1.0.0",
   "description": "",
-  "main": "src/main/main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron . -D",
     "pack": "electron-builder --dir",
@@ -31,7 +31,9 @@
   },
   "devDependencies": {
     "electron": "^1.7.9",
-    "electron-builder": "^19.48.2"
+    "electron-builder": "^19.48.2",
+    "material-ui": "^0.20.0",
+    "react-desktop": "^0.3.3"
   },
   "dependencies": {
     "babel-plugin-transform-regenerator": "^6.26.0",

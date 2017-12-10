@@ -24,7 +24,7 @@ function* setTake(actionName, callback) {
     yield takeEvery(
       actionName,
       function * (action){
-        yield put(actions.reducerChange(
+        yield put(actions.stateChange(
           state => callback(state, action)
         ))
       }
@@ -42,13 +42,16 @@ const takeSagas = {
       m.set('val', action.payload)
     ))
   ),
+  ['STATE_INC'] : (state, action)=>(
+    state.withMutations(m => (
+      m.set('val', action.payload)
+    ))
+  ),
   ['COMMAND_MESSAGE'] : (state, action)=>{
     ipcRenderer.send("displayBalloon", {title : 'Notification', content : 'Call!!', wait: 10000});
     return state;
   },
 };
-
-
 
 function* hoge(action) {
   console.log("saga", action.type)
@@ -56,7 +59,7 @@ function* hoge(action) {
     ((ms)=> new Promise(resolve => setTimeout(resolve, ms))),
     1000
   )
-  yield put(actions.reducerChange(
+  yield put(actions.stateChange(
     ((state)=>(
       state.withMutations(m => (
         m.set('val', action.payload)
