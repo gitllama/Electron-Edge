@@ -2,8 +2,7 @@ const ipcRenderer = require("electron").ipcRenderer;
 
 //const initialState = ipcRenderer.sendSync('state');
 
-const reducers =
-{
+const reducers = {
   ['CHANGE_INC'] : (state, action)=>(
     state.withMutations(m => (
       m.set('count', m.get('count')+1)
@@ -16,13 +15,9 @@ const reducers =
   )
 }
 
-// const reducers = Object.assign(
-//   {
 //     ['STATE_CHANGE'] : (state, action) => (
 //       action.payload(state)
 //     )
-//   }
-// );
 
 export function mainReducer(state, action, win) {
   console.log(`mainAction : ${action.type}`)

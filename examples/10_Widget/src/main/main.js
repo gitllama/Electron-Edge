@@ -1,28 +1,29 @@
-//import path from 'path';
 import Immutable from 'immutable';
+import { createStore, applyMiddleware } from 'redux'
+import { ipcMain } from 'electron';
+
+import createSagaMiddleware from 'redux-saga';
+
+import rootSaga  from '../reducers/sagas'
 import { mainReducer }  from '../reducers'
-import { createStore } from 'redux'
 import { CreateWindow } from './window'
-import {ipcMain} from 'electron';
 import {initialState} from '../initialState';
 
-let win = null;
-
+/*
 const store = createStore(
   mainReducer,
   initialState
 );
-/*
+*/
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
-  reducer,
-  state,
+  mainReducer,
+  initialState,
   applyMiddleware(sagaMiddleware)
 );
 sagaMiddleware.run(rootSaga);
-*/
 
 ipcMain.on('state', (event, arg) =>{ event.returnValue = store.getState().toJS(); });
 ipcMain.on('notification', (event, arg) =>{ store.dispatch(arg); });
 
-win = new CreateWindow(store);
+let win = new CreateWindow(store);
