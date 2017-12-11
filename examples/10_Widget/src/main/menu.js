@@ -10,6 +10,7 @@ import {Menu, app, globalShortcut} from 'electron';
  globalShortcut.unregisterAll()
 */
 
+
 export function createMenu(){
   Menu.setApplicationMenu(Menu.buildFromTemplate(
   [
@@ -32,21 +33,4 @@ export function createShortcut(win, obj){
       win.webContents.send(key, obj["global"][key]);
     })
   }
-}
-
-export function createTrayMenu(tray){
-  tray.setContextMenu(Menu.buildFromTemplate(
-  [
-    {
-      label: '新規記事',
-      click (menuItem){ subWindow() }
-    },
-    {
-      type: 'separator'
-    },
-    {
-      label: 'Exit',
-      click (menuItem){ app.quit(); }
-    }
-  ]));
 }
