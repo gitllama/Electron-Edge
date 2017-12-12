@@ -8,35 +8,23 @@ import jschardet from 'jschardet';
 const defaultimage = path.join(__dirname, '../main.png');
 const notificationimage = path.join(__dirname, '../notification.png'); //Native-Image = pngで指定
 
+const isMac = process.platform === 'darwin';
+
 export class CreateWindow{
+
   constructor(store) {
     this.tray = null;
     this.mainWindow = null;
     this.store = store;
     this.watcher = null;
 
-    app.on('ready', ()=> {
-      this.createTray();
-      this.createTrayMenu();
+    this.createTray();
+    this.createTrayMenu();
 
-      //this.createWindow();
-      this.createMenu();
-      // createShortcut(mainWindow, config["shortcut"])
+    //this.createWindow();
+    this.createMenu();
+    // createShortcut(mainWindow, config["shortcut"])
 
-
-    });
-
-    app.on('window-all-closed', ()=> {
-      if (process.platform !== 'darwin') {
-        //app.quit()
-      }
-    });
-
-    app.on('activate', ()=> {
-      if (mainWindow === null) {
-        this.createWindow()
-      }
-    });
 
     this.watcherRun(this.store.getState().getIn(['monitor','enable']))
   }

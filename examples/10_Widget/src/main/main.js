@@ -7,7 +7,8 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga  from '../reducers/rootSaga'
 import { mainReducer }  from '../reducers'
 import { CreateWindow } from './window'
-import {initialState} from '../initialState';
+import { initialState } from '../initialState';
+
 
 
 /*
@@ -29,4 +30,20 @@ let win = null;
 ipcMain.on('state', (event, arg) =>{ event.returnValue = store.getState().toJS(); });
 ipcMain.on('notification', (event, arg) =>{ store.dispatch(arg); });
 
-win = new CreateWindow(store);
+
+app.commandLine.appendSwitch("disable-renderer-backgrounding");
+app.on('ready', ()=> {
+  win = new CreateWindow(store);
+});
+
+app.on('window-all-closed', ()=> {
+  if (!isMac)) {
+    //app.quit()
+  }
+});
+
+app.on('activate', ()=> {
+  // if (mainWindow === null) {
+  //   win.createWindow()
+  // }
+});
