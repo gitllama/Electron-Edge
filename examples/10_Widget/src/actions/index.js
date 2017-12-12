@@ -13,6 +13,6 @@ export default createActions(
   'STATE_CHANGE',
   'CHANGE_INC',
   'CHANGE_RUN',
-
+  'CHANGE_INC_ASYNC',
   'COMMAND_MESSAGE',
 );

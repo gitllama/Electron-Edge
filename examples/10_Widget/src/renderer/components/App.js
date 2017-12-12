@@ -26,7 +26,7 @@ class App extends React.Component {
         <br/>
         {this.props.state.get("count")}
         <button type="button"
-          onClick={()=> this.props.actions.changeInc()}
+          onClick={()=> this.props.actions.changeIncAsync()}
         >PATTERN_BASIC</button>
       </div>
     )

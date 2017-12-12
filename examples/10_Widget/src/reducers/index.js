@@ -1,30 +1,30 @@
-const ipcRenderer = require("electron").ipcRenderer;
+import { ipcRenderer, BrowserWindow } from 'electron';
+import { reducers } from './logic';
 
-//const initialState = ipcRenderer.sendSync('state');
-
-const reducers = {
-  ['CHANGE_INC'] : (state, action)=>(
-    state.withMutations(m => (
-      m.set('count', m.get('count')+1)
-    ))
-  ),
-  ['CHANGE_RUN'] : (state, action)=>(
-    state.withMutations(m => (
-      m.setIn(['monitor','enable'], action.payload)
-    ))
+function mergeMeta(meta){
+  return Object.assign(
+    {
+      meta : {
+        notification : false
+      }
+    },
+    meta
   )
 }
 
-//     ['STATE_CHANGE'] : (state, action) => (
-//       action.payload(state)
-//     )
+//this.store.dispatch({type : 'CHANGE_INC', meta : { window : [this.mainWindow]}});
+// -> BrowserWindow.getAllWindows()
 
-export function mainReducer(state, action, win) {
-  console.log(`mainAction : ${action.type}`)
-  let meta =mergeMeta(action.meta);
-  if(!meta.notification){
-    meta.window.forEach((element, index)=>{
+export function mainReducer(state, action) {
+  action = mergeMeta(action);
+  console.log(`mainAction : ${action.type}, ${action.meta.notification}`);
+
+  //reducersかsagaか判定
+  if(reducers[action.type]){
+    //flagの付加、ipc送信(とりあえずすべてのwindowに)
+    BrowserWindow.getAllWindows().forEach((element, index)=>{
       if(element == null) return;
+      console.log(`send`)
       element.webContents.send(
         'notification',
         {
@@ -34,36 +34,22 @@ export function mainReducer(state, action, win) {
         }
       )
     });
+    return reducers[action.type](state, action);
   }
-  return reducers[action.type]
-    ? reducers[action.type](state, action)
-    : state;
+  return state;
 }
 
 export function rendererReducer(state, action) {
-  console.log(`rendererAction : ${action.type}`)
-  let meta = mergeMeta(action.meta);
-  if(!meta.notification){
-    ipcRenderer.send(
-      'notification',
-      {
-        type : action.type,
-        payload : action.payload,
-        meta : { notification : true }
-      }
-    );
+  action = mergeMeta(action);
+  console.log(`rendererAction : ${action.type}, ${action.meta.notification}`)
+
+  //flagの確認、なかった場合ipc送り
+  if(!action.meta.notification){
+    ipcRenderer.send('notification', action);
+    return state;
   }
+
   return reducers[action.type]
     ? reducers[action.type](state, action)
     : state;
-}
-
-function mergeMeta(meta){
-  return Object.assign(
-    {
-      notification : false,
-      window : []
-    },
-    meta
-  )
 }

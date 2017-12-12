@@ -1,7 +1,12 @@
 import path from 'path';
-import {app, BrowserWindow, ipcMain, Tray, Menu} from 'electron';
-import {createMenu, createShortcut, createTrayMenu} from './menu'
+import {app, BrowserWindow, ipcMain, Tray, Menu, globalShortcut} from 'electron';
 import fs from 'fs';
+import * as child_process from 'child_process';
+import iconvLite from 'iconv-lite';
+import jschardet from 'jschardet';
+
+const defaultimage = path.join(__dirname, '../main.png');
+const notificationimage = path.join(__dirname, '../notification.png'); //Native-Image = pngで指定
 
 export class CreateWindow{
   constructor(store) {
@@ -12,11 +17,12 @@ export class CreateWindow{
 
     app.on('ready', ()=> {
       this.createTray();
-      this.createWindow();
+      this.createTrayMenu();
 
-      // createMenu();
+      //this.createWindow();
+      this.createMenu();
       // createShortcut(mainWindow, config["shortcut"])
-      this.createTrayMenu()
+
 
     });
 
@@ -37,16 +43,22 @@ export class CreateWindow{
 
   createTray(){
     this.tray = new Tray(path.join(__dirname, '../main.png'));
-    this.tray.setToolTip('RedmineWidget');   // 通知領域のアイコンにマウスを載せたときのタイトル
+    this.tray.setToolTip('UpdateMonitoringWidget');   // 通知領域のアイコンにマウスを載せたときのタイトル
     this.tray.on('click', () => {
-      if(this.mainWindow === null){
-        //tray.setImage(path.join(__dirname, '../main.png'))
-        //store.dispath{}
-        //createWindow();
-      }else{
-        this.store.dispatch({type : 'CHANGE_INC', meta : { window : [this.mainWindow]}});
-      }
-    })
+        this.tray.setImage(defaultimage);
+        var i = this.store.getState().getIn(['monitor','path']);
+
+        child_process.exec(`start ${i}`, (err, stdout, stderr) => {
+          if (err) { console.log(err); }
+          console.log(stdout);
+        });
+
+      // if(this.mainWindow === null){
+      //   //createWindow();
+      // }else{
+      //   this.store.dispatch({type : 'CHANGE_INC'});
+      // }
+    });
   }
 
   createWindow(){
@@ -68,8 +80,14 @@ export class CreateWindow{
         type: 'checkbox',
         checked : this.store.getState().getIn(['monitor','enable']),
         click: (e)=> {
-          this.store.dispatch({type : 'CHANGE_RUN', payload : e.checked, meta : {window : [this.mainWindow] }})
+          this.store.dispatch({type : 'CHANGE_RUN', payload : e.checked})
           this.watcherRun(e.checked)
+        }
+      },
+      {
+        label: 'Setting',
+        click: (e)=> {
+          this.createWindow();
         }
       },
       {
@@ -80,6 +98,30 @@ export class CreateWindow{
         click (menuItem){ app.quit(); }
       }
     ]));
+  }
+
+  createMenu(){
+    Menu.setApplicationMenu(Menu.buildFromTemplate(
+    [
+      {
+        label: 'Menu',
+        submenu: [
+          {
+            label: 'Exit',
+            accelerator: 'Ctrl+Q',
+            click () { app.quit(); }
+          }
+        ]
+      }
+    ]));
+  }
+
+  createShortcut(win, obj){
+    for(let key in obj["global"]){
+      globalShortcut.register(key, () => {
+        win.webContents.send(key, obj["global"][key]);
+      })
+    }
   }
 
   watcherRun(flag){
@@ -93,6 +135,7 @@ export class CreateWindow{
           },
           this.store.getState().getIn(["monitor","displaytime"])
         );
+        this.tray.setImage(notificationimage);
         //watcher.close();
       })
     }else{
@@ -191,5 +234,12 @@ const remote = require('electron').remote;
       e.preventDefault();
       menu.popup(remote.getCurrentWindow());
       }, false);
+      import iconvLite from 'iconv-lite';
+      import jschardet from 'jschardet';
+      import encoding from 'encoding-japanese';
+      var string = encodeURI('日本語');
+      //console.log(encodeURIComponent(utf8_text));
+
+      console.log(URLDecoder.decode(string, "shift-jis"))
 
 */

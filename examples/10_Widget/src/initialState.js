@@ -10,11 +10,10 @@ export const initialState = Immutable.fromJS({
   }
 });
 
-const configState = Immutable.Map({
+export const configState = Immutable.Map({
 
   shortcut :{
     global : {
-      "ctrl+u" : "COMMAND_MESSAGE"
     },
     main : {
     }
@@ -22,9 +21,5 @@ const configState = Immutable.Map({
   window :{
     width: 800,
     height: 600,
-    //frame: false,
-    //transparent: true
-    //kiosk : true //全画面で専用端末画面みたいにできる
-    //icon : path.join(__dirname, '../main.png') //Native-Image = pngで指定
   }
 });

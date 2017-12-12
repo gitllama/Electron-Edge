@@ -4,10 +4,11 @@ import { ipcMain } from 'electron';
 
 import createSagaMiddleware from 'redux-saga';
 
-import rootSaga  from '../reducers/sagas'
+import rootSaga  from '../reducers/rootSaga'
 import { mainReducer }  from '../reducers'
 import { CreateWindow } from './window'
 import {initialState} from '../initialState';
+
 
 /*
 const store = createStore(
@@ -23,7 +24,9 @@ const store = createStore(
 );
 sagaMiddleware.run(rootSaga);
 
+let win = null;
+
 ipcMain.on('state', (event, arg) =>{ event.returnValue = store.getState().toJS(); });
 ipcMain.on('notification', (event, arg) =>{ store.dispatch(arg); });
 
-let win = new CreateWindow(store);
+win = new CreateWindow(store);
