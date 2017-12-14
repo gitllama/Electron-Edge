@@ -1,32 +1,32 @@
 import actions from '../actions';
-import { call, put, take, select, fork, takeEvery, takeLatest } from 'redux-saga/effects'
+import { call, put, take, select, fork, takeEvery, takeLatest } from 'redux-saga/effects';
 
-//reducers, sagas
+// reducers, sagas
 
 export const reducers = {
-  ['CHANGE_INC'] : (state, action)=>(
+  CHANGE_INC: (state, action) => (
     state.withMutations(m => (
-      m.set('count', m.get('count')+1)
+      m.set('count', m.get('count') + 1)
     ))
   ),
-  ['CHANGE_RUN'] : (state, action)=>(
+  CHANGE_RUN: (state, action) => (
     state.withMutations(m => (
-      m.setIn(['monitor','enable'], action.payload)
+      m.setIn(['monitor', 'enable'], action.payload)
     ))
-  )
-}
+  ),
+};
 
 export const sagas = {
-  ['CHANGE_INC_ASYNC'] : incsync
+  CHANGE_INC_ASYNC: incsync,
 };
 
 
 // logic
 
-function* incsync(action){
-  //let type = yield select(state => state.get("type"))
+function* incsync(action) {
+  // let type = yield select(state => state.get("type"))
   yield call(
-    ((ms)=> new Promise(resolve => setTimeout(resolve, ms))),
+    (ms) => new Promise(resolve => setTimeout(resolve, ms)),
     2000
   )
   yield put(actions.changeInc());

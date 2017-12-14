@@ -1,17 +1,12 @@
 import path from 'path';
-import {app, BrowserWindow, ipcMain, Tray, Menu, globalShortcut} from 'electron';
+import { app, BrowserWindow, Tray, Menu, globalShortcut } from 'electron';
 import fs from 'fs';
-import * as child_process from 'child_process';
-import iconvLite from 'iconv-lite';
-import jschardet from 'jschardet';
+import * as childProcess from 'child_process';
 
 const defaultimage = path.join(__dirname, '../main.png');
-const notificationimage = path.join(__dirname, '../notification.png'); //Native-Image = pngで指定
+const notificationimage = path.join(__dirname, '../notification.png'); // Native-Image = pngで指定
 
-const isMac = process.platform === 'darwin';
-
-export class CreateWindow{
-
+export class CreateWindow {
   constructor(store) {
     this.tray = null;
     this.mainWindow = null;
@@ -21,25 +16,23 @@ export class CreateWindow{
     this.createTray();
     this.createTrayMenu();
 
-    //this.createWindow();
+    // this.createWindow();
     this.createMenu();
     // createShortcut(mainWindow, config["shortcut"])
 
-
-    this.watcherRun(this.store.getState().getIn(['monitor','enable']))
+    this.watcherRun(this.store.getState().getIn(['monitor', 'enable']));
   }
 
-  createTray(){
+  createTray() {
     this.tray = new Tray(path.join(__dirname, '../main.png'));
-    this.tray.setToolTip('UpdateMonitoringWidget');   // 通知領域のアイコンにマウスを載せたときのタイトル
+    this.tray.setToolTip('UpdateMonitoringWidget'); // 通知領域のアイコンにマウスを載せたときのタイトル
     this.tray.on('click', () => {
-        this.tray.setImage(defaultimage);
-        var i = this.store.getState().getIn(['monitor','path']);
-
-        child_process.exec(`start ${i}`, (err, stdout, stderr) => {
-          if (err) { console.log(err); }
-          console.log(stdout);
-        });
+      this.tray.setImage(defaultimage);
+      const i = this.store.getState().getIn(['monitor', 'path']);
+      childProcess.exec(`start ${i}`, (err, stdout, stderr) => {
+        if (err) { console.log(err); }
+        console.log(stdout);
+      });
 
       // if(this.mainWindow === null){
       //   //createWindow();
@@ -49,84 +42,81 @@ export class CreateWindow{
     });
   }
 
-  createWindow(){
-    this.mainWindow = new BrowserWindow(
-    {
+  createWindow() {
+    this.mainWindow = new BrowserWindow({
       width: 800,
-      height: 600
+      height: 600,
     });
     this.mainWindow.loadURL(`file://${path.join(__dirname, '../renderer/index.html')}`);
-    this.mainWindow.on('closed', ()=> { this.mainWindow = null });
+    this.mainWindow.on('closed', () => { this.mainWindow = null; });
     this.mainWindow.webContents.openDevTools();
   }
 
-  createTrayMenu(tray, store){
-    this.tray.setContextMenu(Menu.buildFromTemplate(
-    [
+  createTrayMenu() {
+    this.tray.setContextMenu(Menu.buildFromTemplate([
       {
         label: 'RUN',
         type: 'checkbox',
-        checked : this.store.getState().getIn(['monitor','enable']),
-        click: (e)=> {
-          this.store.dispatch({type : 'CHANGE_RUN', payload : e.checked})
-          this.watcherRun(e.checked)
-        }
+        checked: this.store.getState().getIn(['monitor', 'enable']),
+        click: (e) => {
+          this.store.dispatch({ type: 'CHANGE_RUN', payload: e.checked });
+          this.watcherRun(e.checked);
+        },
       },
       {
         label: 'Setting',
-        click: (e)=> {
+        click: (e) => {
           this.createWindow();
-        }
+        },
       },
       {
-        type: 'separator'
+        type: 'separator',
       },
       {
         label: 'Exit',
-        click (menuItem){ app.quit(); }
-      }
+        click: () => { app.quit(); },
+      },
     ]));
   }
 
-  createMenu(){
-    Menu.setApplicationMenu(Menu.buildFromTemplate(
-    [
+  static createMenu() {
+    Menu.setApplicationMenu(Menu.buildFromTemplate([
       {
         label: 'Menu',
         submenu: [
           {
             label: 'Exit',
             accelerator: 'Ctrl+Q',
-            click () { app.quit(); }
-          }
-        ]
-      }
+            click: () => { app.quit(); },
+          },
+        ],
+      },
     ]));
   }
 
-  createShortcut(win, obj){
-    for(let key in obj["global"]){
+  static createShortcut(win, obj) {
+    Object.keys(obj.global).forEach((key) => {
       globalShortcut.register(key, () => {
-        win.webContents.send(key, obj["global"][key]);
-      })
-    }
+        win.webContents.send(key, obj.global[key]);
+      });
+    });
   }
 
-  watcherRun(flag){
-    if(flag){
-      this.watcher = fs.watch(this.store.getState().getIn(["monitor","path"]), (event, filename)=> {
-        //バルーンを上げます
+  watcherRun(flag) {
+    if (flag) {
+      this.watcher = fs.watch(this.store.getState().getIn(['monitor', 'path']), (event, filename) => {
+        // バルーンを上げます
         this.tray.displayBalloon(
           {
-            title : `${event}`,
-            content :  `${filename}`,
+            title: `${event}`,
+            content: `${filename}`,
           },
-          this.store.getState().getIn(["monitor","displaytime"])
+          this.store.getState().getIn(['monitor', 'displaytime'])
         );
         this.tray.setImage(notificationimage);
-        //watcher.close();
-      })
-    }else{
+        // watcher.close();
+      });
+    } else {
       this.watcher.close();
       this.watcher = null;
     }
@@ -139,9 +129,9 @@ fs.readdir(".", (err, files)=>{
   if (err) throw err;
   console.log(files)
   let fileList = files.filter((f)=>{
-    //atime	アクセス時間	指定日数内にアクセスされたファイル
-    //ctime	作成時間	指定日数内に属性変更されたファイル
-    //mtime	修正時間（iノード管理）	指定日数内に修正、更新されたファイル
+    // atime	アクセス時間	指定日数内にアクセスされたファイル
+    // ctime	作成時間	指定日数内に属性変更されたファイル
+    // mtime	修正時間（iノード管理）	指定日数内に修正、更新されたファイル
 
     var dt = new Date(fs.statSync(f).mtime);
     console.log(dt.toLocaleString())

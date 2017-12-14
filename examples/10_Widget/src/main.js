@@ -1,12 +1,9 @@
-'use strict';
-
-//コマンドラインオプションの確認, ready前に書かないとコンソール持ってかれる
-if(process.argv.indexOf('-H') > 0){
+if (process.argv.indexOf('-H') > 0) {
   console.log(`
     Help
-     -H : Help
+      -H : Help
   `);
-}else{
+} else {
   require('babel-register');
   require('./main/main');
 }
