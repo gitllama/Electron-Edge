@@ -4,6 +4,15 @@ import { bindActionCreators } from 'redux';
 
 import actions from '../../actions';
 
+// const sheet = {
+//   width: '210mm',
+//   height: '296mm', /* 1mm余裕をもたせる */
+//   pageBreakAfter: 'always',
+//   boxShadow: '0 .5mm 2mm rgba(0,0,0,.3)', /* ドロップシャドウ */
+//   margin: '5mm',
+//   background: 'white',
+// };
+
 // CSS Grid Layout
 // 210mm x296mm
 /*
