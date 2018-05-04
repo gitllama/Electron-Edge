@@ -1,7 +1,7 @@
-import app from "app";
-import BrowserWindow from "browser-window";
-import crashReporter from 'crash-reporter';
-import {ipcMain} from "electron";
+//import app from app;
+//import BrowserWindow from "browser-window";
+//import crashReporter from 'crash-reporter';
+import {app, ipcMain, BrowserWindow, crashReporter} from "electron";
 
 if(process.env.NODE_ENV === 'develop'){
   crashReporter.start();
