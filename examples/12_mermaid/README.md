@@ -11,10 +11,10 @@ gantt
   dateFormat YYYY-MM-DD
   title Adding GANTT diagram functionality to mermaid
   section Lot001
-    TPSCo : done,         001_1, 2014-01-06, 2014-01-08
-    TP    : done, active, 001_2, 2014-01-06, 2014-01-08
-    IDK   : done,         001_3, 2014-01-06, 2014-01-08
-    IDK   :               001_4, 2014-01-06, 2014-01-08
+    A : done,         001_1, 2014-01-06, 2014-01-08
+    B    : done, active, 001_2, 2014-01-06, 2014-01-08
+    C   : done,         001_3, 2014-01-06, 2014-01-08
+    C   :               001_4, 2014-01-06, 2014-01-08
   ```
 - ForegroundColor : done, active, [null]
 - LineColor : crit, [null]
