@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../actions'
 import Immutable from 'immutable';
+import * as d3 from 'd3';
 
 class App extends React.Component {
   constructor(props) {
@@ -24,6 +25,22 @@ class App extends React.Component {
     return null;
   }
   componentDidUpdate(prevProps, prevState) {
+    //count
+    console.log(prevProps.state.get("count"));
+    console.log(this.props.state.get("count"));
+
+    const node = this.node
+    var svg = d3.select(node)
+    svg.selectAll("svg > *").remove();
+    svg.attr("height", 100)
+        .attr("width", 100);
+    svg.append("circle")
+      .attr("cx",50)
+      .attr("cy",50)
+      .attr("r",20-this.props.state.get("count"))
+      .attr("fill","green")
+      .attr("stroke-width",3)
+      .attr("stroke","orange");
     // console.log(prevProps.txt);
     // console.log(prevState.count);
   }
@@ -31,16 +48,8 @@ class App extends React.Component {
     //this.setState({ world: e.target.value });
   }
   render() {
-    let svg = this.props.state.get("svg");
-    return (
-      <div>
-      {
-        (svg != null)
-          ? (<div dangerouslySetInnerHTML={{__html: svg}} />)
-          : (<div>nulool</div>)
-      }
-      </div>
-    );
+
+    return <svg ref={node => this.node = node}></svg>
   }
 }
 

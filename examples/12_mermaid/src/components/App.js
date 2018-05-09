@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import actions from '../actions'
 import Immutable from 'immutable'
 import Mermaid from './Mermaid.jsx'
+import D3 from './D3.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -19,10 +20,13 @@ class App extends React.Component {
         {this.props.state.get("val")} {this.props.state.get("count")}
         <br/>
         <button type="button"
+          onClick={()=>this.props.actions.patternDInc()}>A</button>
+        <button type="button"
           onClick={()=>this.props.actions.sqlAsynclatest("SQL_ASYNCLATEST")}
         >CCC</button>
         <br/>
         <Mermaid />
+        <D3/>
       </div>
     )
   }
