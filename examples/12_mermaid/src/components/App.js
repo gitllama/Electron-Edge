@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import actions from '../actions'
 import Immutable from 'immutable'
 import Mermaid from './Mermaid.jsx'
-import D3 from './D3.jsx'
+import WfMap from './WfMap.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class App extends React.Component {
         >CCC</button>
         <br/>
         <Mermaid />
-        <D3/>
+        <WfMap/>
       </div>
     )
   }
