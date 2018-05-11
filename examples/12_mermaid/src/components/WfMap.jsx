@@ -5,8 +5,9 @@ import actions from '../actions'
 import Immutable from 'immutable';
 import * as d3 from 'd3';
 
-const mapconfig = require('../../map.json');
-const margin = {"top": 20, "left":20,"right":3,"bottom":3}
+const mapconfig = "mapconfig";
+const wfmaps = "wfmap";
+const margin = {"top": 20, "left":20,"right":3,"bottom":20}
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class App extends React.Component {
   }
   componentDidMount() {
     //this.inputRef.current.focus();
+    this.writeWf();
   }
   getSnapshotBeforeUpdate(prevProps, prevState){
     return null;
@@ -28,33 +30,50 @@ class App extends React.Component {
     return null;
   }
   componentDidUpdate(prevProps, prevState) {
-    //count
-    console.log(prevProps.state.get("count"));
-    console.log(this.props.state.get("count"));
-
+    console.log(prevProps.state.get("count") === this.props.state.get("count"))
+    console.log(prevProps.state.get(mapconfig) === this.props.state.get(mapconfig))
+    this.writeWf();
+    this.writeWf2();
+  }
+  writeWf(){
     const node = this.node
     let wf = d3.select(node)
     wf.selectAll("svg > *").remove();
     this.baseCreate(wf);
+    this.gridCreate(wf);
     this.wfCreate(wf);
     this.axisCreate(wf);
-    this.gridCreate(wf);
-    //this.chipStat(wf);
-
+  }
+  writeWf2(){
+    const node = this.node
+    let wf = d3.select(node)
+    this.chipStat(wf);
   }
   baseCreate(wf){
-    const countX = mapconfig["countX"]
-    const countY = mapconfig["countY"]
-    const chipSizeX = mapconfig["chipSizeX"]
-    const chipSizeY = mapconfig["chipSizeY"]
-    wf.attr("height", chipSizeY * countY + margin.top + margin.bottom)
-      .attr("width", chipSizeX * countX + margin.left + margin.right);
+    const countX = this.props.state.get(mapconfig)["countX"]
+    const countY = this.props.state.get(mapconfig)["countY"]
+    const chipSizeX = this.props.state.get(mapconfig)["chipSizeX"]
+    const chipSizeY = this.props.state.get(mapconfig)["chipSizeY"]
+
+    const width = chipSizeX * countX + margin.left + margin.right;
+    const height = chipSizeY * countY + margin.top + margin.bottom;
+
+    wf.attr("height", height)
+      .attr("width", width);
+    wf.append("text")
+      .attr("x", width / 2 + margin.left / 2)
+      .attr("y", height -  margin.bottom / 2)
+      .attr("text-anchor", "middle")
+      .attr("dominant-baseline", "middle")
+      .attr("font-family","sans-serif")
+      .attr("font-size",12)
+      .text(`${this.props.lotno}-${this.props.wfno}`);
   }
   axisCreate(wf){
-    const countX = mapconfig["countX"]
-    const countY = mapconfig["countY"]
-    const chipSizeX = mapconfig["chipSizeX"]
-    const chipSizeY = mapconfig["chipSizeY"]
+    const countX = this.props.state.get(mapconfig)["countX"]
+    const countY = this.props.state.get(mapconfig)["countY"]
+    const chipSizeX = this.props.state.get(mapconfig)["chipSizeX"]
+    const chipSizeY = this.props.state.get(mapconfig)["chipSizeY"]
     wf.selectAll("rect")
       .data([...Array(countX)])
       .enter()
@@ -79,20 +98,20 @@ class App extends React.Component {
       .text((_, i) => i);
   }
   wfCreate(wf){
-    const offsetX = mapconfig["offsetX"] + margin.left
-    const offsetY = mapconfig["offsetY"] + margin.top
-    const chipSizeX = mapconfig["chipSizeX"]
-    const chipSizeY = mapconfig["chipSizeY"]
-    const countX = mapconfig["countX"]
-    const countY = mapconfig["countY"]
-    const edge = mapconfig["edge"]
+    const offsetX = this.props.state.get(mapconfig)["offsetX"] + margin.left
+    const offsetY = this.props.state.get(mapconfig)["offsetY"] + margin.top
+    const chipSizeX = this.props.state.get(mapconfig)["chipSizeX"]
+    const chipSizeY = this.props.state.get(mapconfig)["chipSizeY"]
+    const countX = this.props.state.get(mapconfig)["countX"]
+    const countY = this.props.state.get(mapconfig)["countY"]
+    const edge = this.props.state.get(mapconfig)["edge"]
 
     const notchside = 0
     wf.append("circle")
        .attr("cx",100 + offsetX )
        .attr("cy",100 + offsetY )
        .attr("r",100)
-       .attr("fill","lightgray")
+       .attr("fill","darkgray")
        .attr("stroke-width",2)
        .attr("stroke","black");
     wf.append("circle")
@@ -115,14 +134,15 @@ class App extends React.Component {
       .attr("x2",100 + offsetX + 100 * Math.cos((notchside-4)*Math.PI/180))
       .attr("y2",100 + offsetY + 100 * Math.sin((notchside-4)*Math.PI/180))
       .attr("stroke-width",2)
-      .attr("stroke","black");
+      .attr("stroke","black")
+      .attr("fill","none");
   }
 
   gridCreate(wf){
-    const chipSizeX = mapconfig["chipSizeX"];
-    const chipSizeY = mapconfig["chipSizeY"];
-    const countX = mapconfig["countX"];
-    const countY = mapconfig["countY"];
+    const chipSizeX = this.props.state.get(mapconfig)["chipSizeX"];
+    const chipSizeY = this.props.state.get(mapconfig)["chipSizeY"];
+    const countX = this.props.state.get(mapconfig)["countX"];
+    const countY = this.props.state.get(mapconfig)["countY"];
 
     let x = Array.from(new Array(countX+1),(v,i)=>{
       return {
@@ -140,7 +160,6 @@ class App extends React.Component {
         "y2" : i*chipSizeY + margin.top
       }
     });
-    console.log(x.concat(y));
     wf.selectAll("line")
       .data(x.concat(y))
       .enter()
@@ -154,20 +173,37 @@ class App extends React.Component {
       .attr("stroke-dasharray", "1, 1");
   }
   chipStat(wf){
-    const chipSizeY = mapconfig["chipSizeY"]
-    const chipSizeX = mapconfig["chipSizeX"]
+    const chipSizeY = this.props.state.get(mapconfig)["chipSizeY"]
+    const chipSizeX = this.props.state.get(mapconfig)["chipSizeX"]
 
-    var svgCircle = wf.selectAll("rect")
-    	.data(mapconfig["effective"])
-    	.enter()
-      .append("rect")
-      .attr("x",(i)=>chipSizeX * i["y"] + margin.left)
-      .attr("y",(i)=>chipSizeY * i["x"] + margin.top)
-      .attr("width",chipSizeX)
-      .attr("height",chipSizeY)
-      .attr("fill","white")
-      .attr("stroke-width",1)
-      .attr("stroke","black");
+    const chipnos = this.props.state.get(mapconfig)["effective"]
+    const wm = this.props.state.get(wfmaps)[`${this.props.wfno}`];
+
+    //Array.from(new Array(54),(val,index)=>index+1);
+    const keys = Object.keys(chipnos)
+
+    if(wm){
+      wf.selectAll("rect")
+      	.data(keys)
+      	.enter()
+        .append("rect")
+        .attr("x",(i)=>chipSizeX * chipnos[i]["x"] + margin.left)
+        .attr("y",(i)=>chipSizeY * chipnos[i]["y"] + margin.top)
+        .attr("width",chipSizeX)
+        .attr("height",chipSizeY)
+        .attr("stroke-width",1)
+        .attr("stroke","black")
+        .attr("fill",(i)=>{
+          switch (wm[i]) {
+            case 1:
+              return "black";
+            case 2:
+              return "white";
+            default:
+              return "lightgray";
+            }
+        });
+    }
 
     //     svg.append("text")
     //     .attr("x", chipSizeX * (i["y"] + 0.5))
@@ -180,9 +216,9 @@ class App extends React.Component {
     //   });
   }
   chipClickable(wf){
-    const chipSizeY = mapconfig["chipSizeY"]
-    const chipSizeX = mapconfig["chipSizeX"]
-    mapconfig["effective"].map((i)=>{
+    const chipSizeY = this.props.state.get(mapconfig)["chipSizeY"]
+    const chipSizeX = this.props.state.get(mapconfig)["chipSizeX"]
+    this.props.state.get(mapconfig)["effective"].map((i)=>{
         wf.append("rect")
         .on("click",d=>console.log("aaa"))
         .attr("x",chipSizeX * i["y"])
@@ -197,9 +233,11 @@ class App extends React.Component {
   onChangeState(e){
     //this.setState({ world: e.target.value });
   }
+
   render() {
     return <svg ref={node => this.node = node}></svg>
   }
+
 }
 
 export default connect(

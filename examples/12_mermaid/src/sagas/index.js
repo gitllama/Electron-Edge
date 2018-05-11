@@ -4,7 +4,7 @@ import actions from '../actions';
 import Immutable from 'immutable';
 
 import {sqlAsync, incAsync} from './gantt.js';
-
+import {readlogAsync} from './LogMatch.js';
 //saga monitor
 
 export default function* rootSaga() {
@@ -55,4 +55,5 @@ const takeSagas = {
     ))
   ),
   ['SQL_ASYNCLATEST'] : sqlAsync,
+  ['READLOG_ASYNCLATEST'] : readlogAsync
 };

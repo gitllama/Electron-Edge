@@ -1,5 +1,6 @@
 const path = require('path');
 const url = require('url');
+const fs = require('fs');
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -65,6 +66,19 @@ function installMenu() {
           label: 'Exit',
           accelerator: 'Ctrl+Q',
           click () { app.quit(); }
+        },
+        {
+          label: 'PrintPDF',
+          accelerator: 'Ctrl+P',
+          click () {
+            mainWindow.webContents.printToPDF({}, (error, data) => {
+              if (error) throw error
+              fs.writeFile('print.pdf', data, (error) => {
+                if (error) throw error
+                console.log('Write PDF successfully.')
+              })
+            });
+          }
         }
       ]
     }

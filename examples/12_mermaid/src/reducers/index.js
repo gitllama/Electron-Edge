@@ -5,7 +5,9 @@ const initialState = Immutable.Map({
   count : 0,
   buf : null,
   flag : false,
-  svg : null
+  svg : null,
+  mapconfig : require('../../map.json'),
+  wfmap : require('../../map0.json')
 });
 
 const reducers = {

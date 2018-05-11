@@ -16,6 +16,7 @@ export default createActions(
   'PATTERN_D_INC_ASYNCLATEST',
 
   'SQL_ASYNCLATEST',
+  'READLOG_ASYNCLATEST',
 
   'SHORTCUT_INC',
 );
