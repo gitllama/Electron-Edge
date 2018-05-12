@@ -48,3 +48,8 @@ export default connect(
   state => ({state}),
   dispatch =>({ actions: bindActionCreators(actions, dispatch) })
 )(App)
+
+//{svg == null
+//  ? <div>null</div>
+//  : <div dangerouslySetInnerHTML={{__html: this.props.state.get("svg")}} />
+//}

@@ -30,8 +30,8 @@ class App extends React.Component {
     return null;
   }
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps.state.get("count") === this.props.state.get("count"))
-    console.log(prevProps.state.get(mapconfig) === this.props.state.get(mapconfig))
+    //console.log(prevProps.state.get("count") === this.props.state.get("count"))
+    //console.log(prevProps.state.get(mapconfig) === this.props.state.get(mapconfig))
     this.writeWf();
     this.writeWf2();
   }

@@ -5,7 +5,7 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
-var mainWindow;
+let mainWindow;
 
 function createWindow () {
   const configJson = require('../config.json');
@@ -32,7 +32,7 @@ function createWindow () {
   mainWindow.on('closed', function () {
     mainWindow = null
   });
-  setShortcut();
+  setShortcut(configJson);
 };
 
 app.on('ready', createWindow)
@@ -55,9 +55,7 @@ process.on('uncaughtException', function (error) {
 
 function installMenu() {
   const Menu = electron.Menu;
-  // Win/Macではkeyが違うので
-  // if(process.platform == 'darwin') で分けるかCommandOrControl+Xのような書き方
-  // 追加はmainWindow.setMenu(menu);
+
   Menu.setApplicationMenu(Menu.buildFromTemplate([
     {
       label: 'Menu',
@@ -79,18 +77,50 @@ function installMenu() {
               })
             });
           }
+        },
+        {
+          label: 'ExportSVG',
+          accelerator: 'Ctrl+S',
+          click () {
+            mainWindow.webContents.send("SQL_ASYNCLATEST", "SQL_ASYNCLATEST");
+          }
+        }
+      ]
+    },
+    {
+      label: 'View',
+      submenu: [
+        { label: 'Mermaid',
+          type: 'checkbox', checked: true, click (i) { clickViewMenu(i); }
+        },{ label: 'Wf Edit',
+          type: 'checkbox', checked: false, click (i) { clickViewMenu(i); }
+        },{ label: 'Wf Color',
+          type: 'checkbox', checked: false, click (i) { clickViewMenu(i); }
+        },{ label: 'Wf Mono',
+          type: 'checkbox', checked: false, click (i) { clickViewMenu(i); }
         }
       ]
     }
   ]));
 }
 
-function setShortcut(){
+function clickViewMenu(item){
+  const menu = electron.Menu.getApplicationMenu();
+  menu.items["View"]
+  let result = menu.items.filter((i)=>{
+    return i.label == 'View';
+  })
+  result[0].submenu.items.forEach((i)=>{i.checked = false});
+  item.checked = true;
+  mainWindow.webContents.send("VIEW_CHANGE", item.label);
+}
+
+function setShortcut(config){
   const globalShortcut = electron.globalShortcut;
-  const registerShortcut = require('../shortcut.json');
-  for(let key in registerShortcut["global"]){
+  const registerShortcut = config["shortcut"]["global"];
+  for(let key in registerShortcut){
     globalShortcut.register(key, () => {
-      mainWindow.webContents.send(key, registerShortcut["global"][key]);
+      mainWindow.webContents.send(key, registerShortcut[key]);
     })
   }
 }

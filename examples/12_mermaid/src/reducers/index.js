@@ -1,37 +1,30 @@
 import Immutable from 'immutable';
 
 const initialState = Immutable.Map({
+  view : "WELCOME",
+
   val : "start",
   count : 0,
   buf : null,
   flag : false,
   svg : null,
-  mapconfig : require('../../map.json'),
-  wfmap : require('../../map0.json')
+
+  mapconfig : require('../../mapconfig.json'),
+  wfmap : require('../../map.json'),
+  lotno : "0001(AS5045)",
+  wfselect : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+  wfobject : []
 });
 
 const reducers = {
-    ['PATTERN_BASIC'] : (state, action) => (
-    state.withMutations(m => (
-      m.set('val', action.payload)
-    ))
-  ),
-
-  ['PATTERN_C'] : (state, action) => (
-    state.withMutations(m => (
-      m.set('buf', action.payload)
-       .set('flag', true)
-    ))
-  ),
-  ['PATTERN_C_RETURN'] : (state, action) => (
-    state.withMutations(m => (
-      m.set('val', action.payload)
-       .set('flag', false)
-    ))
-  ),
-
   ['REDUCER_CHANGE'] : (state, action) => (
     action.payload(state)
+  ),
+
+  ['VIEW_CHANGE'] : (state, action) => (
+    state.withMutations(m => (
+      m.set('view', action.payload)
+    ))
   )
 };
 
