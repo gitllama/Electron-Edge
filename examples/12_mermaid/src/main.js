@@ -100,6 +100,15 @@ function installMenu() {
           type: 'checkbox', checked: false, click (i) { clickViewMenu(i); }
         }
       ]
+    },
+    {
+      label: 'Debug',
+      submenu: [
+        {
+          label: 'A',
+          click () { mainWindow.webContents.send("SQL_ASYNCLATEST", "SQL_ASYNCLATEST"); }
+        }
+      ]
     }
   ]));
 }

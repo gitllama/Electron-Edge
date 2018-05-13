@@ -1,3 +1,14 @@
+# WELCOME
+
+- [ ] A
+- [x] B
+- [ ] C
+
+```mermai
+ OTT
+```
+
+```mermaid
 gantt
   dateFormat YYYY-MM-DD
   title Adding GANTT diagram functionality to mermaid
@@ -24,3 +35,4 @@ gantt
       C   : 003_4, 2014-01-14, 2014-01-16
   section Lot003-02
       C   : 003_5, 2014-01-15, 2014-01-17
+```

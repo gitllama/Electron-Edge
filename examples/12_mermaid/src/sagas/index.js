@@ -3,7 +3,7 @@ import actions from '../actions';
 //import { takeSagas } from 'models.js';
 import Immutable from 'immutable';
 
-import {sqlAsync, incAsync} from './gantt.js';
+import {sqlAsync,markdownAsync} from './marked-mermaid.js';
 import {readlogAsync} from './LogMatch.js';
 //saga monitor
 
@@ -54,6 +54,6 @@ const takeSagas = {
       m.set('count', state.get("count")+1)
     ))
   ),
-  ['SQL_ASYNCLATEST'] : sqlAsync,
+  ['SQL_ASYNCLATEST'] : markdownAsync,
   ['READLOG_ASYNCLATEST'] : readlogAsync
 };
