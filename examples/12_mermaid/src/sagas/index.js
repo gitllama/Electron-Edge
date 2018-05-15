@@ -1,17 +1,37 @@
 import { call, put, take, select, fork, takeEvery, takeLatest } from 'redux-saga/effects'
 import actions from '../actions';
-//import { takeSagas } from 'models.js';
 import Immutable from 'immutable';
 
-import {sqlAsync,markdownAsync} from './marked-mermaid.js';
-import {readlogAsync} from './LogMatch.js';
-//saga monitor
+import {sqlAsync,markdownAsync} from '../logic/marked-ex.js';
+import {readlogAsync,readtestAsync} from '../logic/logmatch.js';
 
-export default function* rootSaga() {
-  for(let key in takeSagas){
-    yield fork(setTake, key, takeSagas[key]);
-  }
-}
+const takeSagas = {
+  // ['PATTERN_D_THROUGH'] : (state, action)=>(
+  //   state.withMutations(m => (
+  //     m.set('count', state.get("count")+1)
+  //   ))
+  // ),
+  // ['PATTERN_D_INC_ASYNC'] : incAsync, //連射すると遅れてまとめて帰ってくる
+  // ['PATTERN_D_INC_ASYNCLATEST'] : incAsync, //最後だけ返る（すでに動いてても呼び出しは起こる）
+
+  ['VIEW_CHANGE'] : (state, action) => (
+    state.withMutations(m => (
+      m.set('view', action.payload)
+    ))
+  ),
+
+  ['SHORTCUT_INC'] : (state, action)=>(
+    state.withMutations(m => (
+      m.set('count', state.get("count")+1)
+    ))
+  ),
+  ['READWELCOM_ASYNCLATEST'] : markdownAsync,
+  ['READSQL_ASYNCLATEST'] : sqlAsync,
+  ['READLOG_ASYNCLATEST'] : readlogAsync,
+  ['READTEST_ASYNCLATEST'] : readtestAsync
+};
+
+//saga monitor
 
 function* setTake(actionName, callback) {
   if(actionName.indexOf("_ASYNCLATEST") > 0){
@@ -31,29 +51,12 @@ function* setTake(actionName, callback) {
         ))
       }
     );
-    console.log("registor :",actionName)
+    //console.log("registor :",actionName)
   }
 }
 
-const takeSagas = {
-  ['PATTERN_D_THROUGH'] : (state, action)=>(
-    state.withMutations(m => (
-      m.set('val', action.payload)
-    ))
-  ),
-  ['PATTERN_D_INC'] : (state, action)=>(
-    state.withMutations(m => (
-      m.set('count', state.get("count")+1)
-    ))
-  ),
-  ['PATTERN_D_INC_ASYNC'] : incAsync, //連射すると遅れてまとめて帰ってくる
-  ['PATTERN_D_INC_ASYNCLATEST'] : incAsync, //最後だけ返る（すでに動いてても呼び出しは起こる）
-
-  ['SHORTCUT_INC'] : (state, action)=>(
-    state.withMutations(m => (
-      m.set('count', state.get("count")+1)
-    ))
-  ),
-  ['SQL_ASYNCLATEST'] : markdownAsync,
-  ['READLOG_ASYNCLATEST'] : readlogAsync
-};
+export default function* rootSaga() {
+  for(let key in takeSagas){
+    yield fork(setTake, key, takeSagas[key]);
+  }
+}

@@ -105,8 +105,20 @@ function installMenu() {
       label: 'Debug',
       submenu: [
         {
-          label: 'A',
-          click () { mainWindow.webContents.send("SQL_ASYNCLATEST", "SQL_ASYNCLATEST"); }
+          label: 'READ WELCOM',
+          click () { mainWindow.webContents.send("READWELCOM_ASYNCLATEST", ""); }
+        },
+        {
+          label: 'READ SQL',
+          click () { mainWindow.webContents.send("READSQL_ASYNCLATEST", ""); }
+        },
+        {
+          label: 'READLOG_ASYNCLATEST',
+          click () { mainWindow.webContents.send("READLOG_ASYNCLATEST", "READLOG_ASYNCLATEST"); }
+        },
+        {
+          label: 'READTEST_ASYNCLATEST',
+          click () { mainWindow.webContents.send("READTEST_ASYNCLATEST", "READTEST_ASYNCLATEST"); }
         }
       ]
     }
