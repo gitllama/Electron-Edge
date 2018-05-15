@@ -19,6 +19,7 @@ const dummylegend = {
     "background" : "lightgray"
   }
 }
+
 // props.wfmode
 //  mono / color / bin
 
@@ -142,22 +143,23 @@ function legendCreate(code, canvas){
 function parse(code){
   let json = typeof (code) == "string" ? JSON.parse(code) : code;
   return {
-    countX : json["countX"],
-    countY : json["countY"],
-    chipSizeX : json["chipSizeX"],
-    chipSizeY : json["chipSizeY"],
-    width : json["chipSizeX"] * json["countX"] + margin.left + margin.right,
-    height : json["chipSizeY"] * json["countY"] + margin.top + margin.bottom,
-    offsetX : json["offsetX"] + margin.left,
-    offsetY : json["offsetY"] + margin.top,
-    edge : json["edge"],
-    notch : json["notch"],
-    notchside : json["notchside"],
-    wfsize : json["wfsize"],
+    title : json["title"] || "",
+    countX : json["config"]["countX"],
+    countY : json["config"]["countY"],
+    chipSizeX : json["config"]["chipSizeX"],
+    chipSizeY : json["config"]["chipSizeY"],
+    width : json["config"]["chipSizeX"] * json["config"]["countX"] + margin.left + margin.right,
+    height : json["config"]["chipSizeY"] * json["config"]["countY"] + margin.top + margin.bottom,
+    offsetX : json["config"]["offsetX"] + margin.left,
+    offsetY : json["config"]["offsetY"] + margin.top,
+    edge : json["config"]["edge"],
+    notch : json["config"]["notch"],
+    notchside : json["config"]["notchside"],
+    wfsize : json["config"]["wfsize"],
     chip : json["chip"],
     mode : "BIN",
-    f_x : ((i)=> i*json["chipSizeX"] + margin.left),
-    f_y : ((i)=> i*json["chipSizeY"] + margin.top)
+    f_x : ((i)=> i*json["config"]["chipSizeX"] + margin.left),
+    f_y : ((i)=> i*json["config"]["chipSizeY"] + margin.top)
   }
 }
 

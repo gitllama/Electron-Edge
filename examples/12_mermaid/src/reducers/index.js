@@ -1,6 +1,8 @@
 import Immutable from 'immutable';
 
 const initialState = Immutable.Map({
+  busy : false,
+
   config : require('../../config.json'),
   view : "MAIN",
   html : null,

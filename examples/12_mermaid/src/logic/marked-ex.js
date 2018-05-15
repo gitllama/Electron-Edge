@@ -3,7 +3,7 @@ import { call, put, take, select, fork, takeEvery, takeLatest } from 'redux-saga
 import Immutable from 'immutable';
 //import crypto from 'crypto'; //ハッシュ化
 
-import wavedrom from 'wavedrom';
+//import wavedrom from 'wavedrom';
 import mermaid from 'mermaid';
 import sql from 'sql.js';
 import fs from 'fs';
@@ -17,7 +17,7 @@ mermaid.mermaidAPI.initialize({
   }
 });
 
-function markdownCreate(code){
+export function markdownCreate(code){
   let renderer = new marked.Renderer();
   // renderer.heading = function (text, level) {
   //   var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
@@ -60,62 +60,30 @@ function markdownCreate(code){
     })
 }
 
-export function* markdownAsync(action) {
-  const config = yield select(state => state.get("config"))
-  let contents = fs.readFileSync(`${config['data']['path']}/welcome.md`)
-
-  let dst = markdownCreate(contents.toString());
-
-  yield put(actions.reducerChange(
-    (state)=> state.withMutations(m => m.set('html', dst))
-  ));
-}
-
-export function* sqlAsync(action) {
-  const config = yield select(state => state.get("config"))
-
-  let contents = yield call(
-    filename => new Promise(
-      (resolve, reject) => {
-        let filebuffer = fs.readFileSync(filename);
-        let db = new sql.Database(filebuffer);
-        //let contents = db.exec("SELECT ID FROM test");
-        let dst = "gantt\n";
-        dst += "  dateFormat YYYY-MM-DD\n";
-        dst += "  title GANTT diagram\n";
-        dst += "  section Lot001\n";
-        db.each('SELECT id, start_date, end_date FROM test', null, row => {
-          dst += `    ${row.id} : ${row.id}, ${row.start_date}, ${row.end_date}\n`
-        });
-        db.close();
-        resolve(dst);
-      }
-    ), `${config['data']['path']}/DB.db`
-  );
-
-  //mermaid初期化と描画呼び出し
+export function mermidCreate(path){
+  let filebuffer = fs.readFileSync(path);
+  let db = new sql.Database(filebuffer);
+  //let contents = db.exec("SELECT ID FROM test");
+  let dst = "gantt\n";
+  dst += "  dateFormat YYYY-MM-DD\n";
+  dst += "  title GANTT diagram\n";
+  dst += "  section Lot001\n";
+  db.each('SELECT id, start_date, end_date FROM test', null, row => {
+    dst += `    ${row.id} : ${row.id}, ${row.start_date}, ${row.end_date}\n`
+  });
+  db.close();
   let svg;
-  yield call(
-    (e) => {
-      try {
-        mermaid.mermaidAPI.render(
-          `mermaid-${Date.now()}`,
-          e,
-          (svgCode)=>( svg = svgCode )
-        )
-      } catch(error) {
-        svg = "<p>err</p>";
-      }
-    }, contents
-  );
-
-  yield put(actions.reducerChange(
-    (state)=> state.withMutations(m => m.set('html', svg))
-  ));
+  try {
+    mermaid.mermaidAPI.render(
+      `mermaid-${Date.now()}`,
+      dst,
+      (svgCode)=>( svg = svgCode )
+    )
+  } catch(error) {
+    svg = "<p>err</p>";
+  }
+  return svg;
 }
-
-
-
 
 // var time = new Date().getTime();
 // while (new Date().getTime() < time + 10000);

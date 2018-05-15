@@ -6,6 +6,7 @@ import Immutable from 'immutable';
 
 import SingleMap from './SingleMap.jsx'
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);

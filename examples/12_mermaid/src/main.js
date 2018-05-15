@@ -6,16 +6,17 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
 let mainWindow;
+const configJson = require('../config.json');
 
 function createWindow () {
-  const configJson = require('../config.json');
+  //const configJson = require('../config.json');
   mainWindow = new BrowserWindow({
     title: app.getName(),
     width: configJson["window"]["width"],
     height: configJson["window"]["height"],
     //frame: false,
     //transparent: true
-    //kiosk : true //全画面で専用端末画面みたいにできる
+    kiosk : configJson["window"]["kiosk"] || false //全画面で専用端末画面みたいにできる
   });
 
   mainWindow.loadURL(url.format({
@@ -82,7 +83,7 @@ function installMenu() {
           label: 'ExportSVG',
           accelerator: 'Ctrl+S',
           click () {
-            mainWindow.webContents.send("SQL_ASYNCLATEST", "SQL_ASYNCLATEST");
+            mainWindow.webContents.send("", "");
           }
         }
       ]
@@ -106,11 +107,17 @@ function installMenu() {
       submenu: [
         {
           label: 'READ WELCOM',
-          click () { mainWindow.webContents.send("READWELCOM_ASYNCLATEST", ""); }
+          click () { mainWindow.webContents.send(
+            "READWELCOM_ASYNCLATEST",
+            `${configJson["data"]["path"]}/welcome.md`
+          );}
         },
         {
           label: 'READ SQL',
-          click () { mainWindow.webContents.send("READSQL_ASYNCLATEST", ""); }
+          click () { mainWindow.webContents.send(
+            "READSQL_ASYNCLATEST",
+            `${configJson["data"]["path"]}/DB.db`
+           ); }
         },
         {
           label: 'READLOG_ASYNCLATEST',

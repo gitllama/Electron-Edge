@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import actions from '../actions'
 import Immutable from 'immutable';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -38,7 +39,7 @@ class App extends React.Component {
         {
           (html != null)
             ? (<div dangerouslySetInnerHTML={{__html: html}} />)
-            : (<div>err</div>)
+            : <div>no data</div>
         }
       </div>
     );

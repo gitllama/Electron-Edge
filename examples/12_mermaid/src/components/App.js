@@ -7,6 +7,15 @@ import Immutable from 'immutable'
 import Welcome from './Welcome.jsx'
 import WfMap from './WfMap.jsx'
 
+const loadimgstyle = {
+  "position": "absolute",
+  "top":"0",
+  "left":"0",
+  "bottom":"0",
+  "right":"0",
+  "margin": "auto"
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -20,9 +29,13 @@ class App extends React.Component {
           return ( <WfMap /> );
       }
     }
-    return (
-      <div>{viewselector(this.props.state.get("view"))}</div>
-    );
+    const busycheck =(i)=>{
+      if(i)
+        return <img style={loadimgstyle} src="img/loding.gif" />;
+      else
+        return viewselector(this.props.state.get("view"));
+    }
+    return (<div>{busycheck(this.props.state.get("busy"))}</div>);
   }
 }
 
@@ -32,10 +45,3 @@ export default connect(
       actions: bindActionCreators(actions, dispatch)
   })
 )(App)
-
-// exportSVG(path){
-//   fs.writeFile(path, node.outerHTML, (err) => {
-//     if (err) throw err;
-//     console.log('save successful!');
-//   });
-// }

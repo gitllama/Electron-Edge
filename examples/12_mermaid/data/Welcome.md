@@ -1,34 +1,38 @@
 # WELCOME
 
-- [ ] A
-- [x] B
-- [ ] C
+## schedule
 
-```mermai
- OTT
+```mermaid
+gantt
+  dateFormat YYYY-MM-DD
+  title schedule
+  section Lot001
+    A   : done, 001_A, 2018-04-01 , 2018-04-25
+    B-1 :       001_B, after 001_A, 2018-04-30
+  section Lot001-01
+    B-2 :       001_C, 2018-05-10 , 2018-05-20
 ```
 
-```wavedrom
-{ signal: [
-  { name: "clk",  wave: "P......" },
-  { name: "bus",  wave: "x.==.=x", data: ["head", "body", "tail", "data"] },
-  { name: "wire", wave: "0.1..0." }
-]}
-```
+- 1st Lot is already up.
+- I have to give instructions to the next process.
+
+## Lot Summay
 
 ```wfmap
 {
-  "title" : "TEST",
-  "wfsize" : 200,
-  "offsetX" : 12.2,
-  "offsetY" : 4.0,
-  "chipSizeX" : 24.8,
-  "chipSizeY" : 17.2,
-  "countX" : 9,
-  "countY" : 12,
-  "edge" : 5,
-  "notch" : 9,
-  "notchside" : 0,
+  "title" : "Wf01",
+  "config" : {
+    "wfsize" : 200,
+    "offsetX" : 12.2,
+    "offsetY" : 4.0,
+    "chipSizeX" : 24.8,
+    "chipSizeY" : 17.2,
+    "countX" : 9,
+    "countY" : 12,
+    "edge" : 5,
+    "notch" : 9,
+    "notchside" : 0
+  },
   "chip": [
     {"y" : 1, "x": 3, "text": 22},
     {"y" : 1, "x": 4, "text": 23},
@@ -50,31 +54,6 @@
 }
 ```
 
-```mermaid
-gantt
-  dateFormat YYYY-MM-DD
-  title Adding GANTT diagram functionality to mermaid
-  section Lot001
-    A : 001_1, 2014-01-06, 2014-01-08
-    B    : 001_2, 2014-01-10, 2014-01-12
-    C   : 001_3, 2014-01-13, 2014-01-15
-  section Lot001-01
-    C   : 001_4, 2014-01-14, 2014-01-16
-  section Lot001-02
-    C   :               001_5, 2014-01-15, 2014-01-17
-  section ★Lot002
-      A : crit, 002_1, 2014-01-06, 2014-01-08
-      B    : crit, 002_2, 2014-01-10, 2014-01-12
-      C   : crit, 002_3, 2014-01-13, 2014-01-15
-  section ★Lot002-01
-      C   : crit, 002_4, 2014-01-14, 2014-01-16
-  section Lot003
-  section Lot003-00
-      TPSCo : 003_1, 2014-01-06, 2014-01-08
-      B    : 003_2, 2014-01-10, 2014-01-12
-      C   : 003_3, 2014-01-13, 2014-01-15
-  section Lot003-01
-      C   : 003_4, 2014-01-14, 2014-01-16
-  section Lot003-02
-      C   : 003_5, 2014-01-15, 2014-01-17
-```
+## This document
+
+This documentation is written in GitHub Flavored Markdown (GFM) expanded with mermaid and wfmapEditor.

@@ -2,8 +2,7 @@ import { call, put, take, select, fork, takeEvery, takeLatest } from 'redux-saga
 import actions from '../actions';
 import Immutable from 'immutable';
 
-import {sqlAsync,markdownAsync} from '../logic/marked-ex.js';
-import {readlogAsync,readtestAsync} from '../logic/logmatch.js';
+import * as g from './generator.js';
 
 const takeSagas = {
   // ['PATTERN_D_THROUGH'] : (state, action)=>(
@@ -25,13 +24,19 @@ const takeSagas = {
       m.set('count', state.get("count")+1)
     ))
   ),
-  ['READWELCOM_ASYNCLATEST'] : markdownAsync,
-  ['READSQL_ASYNCLATEST'] : sqlAsync,
-  ['READLOG_ASYNCLATEST'] : readlogAsync,
-  ['READTEST_ASYNCLATEST'] : readtestAsync
+
+  ['READWELCOM_ASYNCLATEST'] : g.markdownAsync,
+  ['READSQL_ASYNCLATEST'] : g.sqlAsync,
+  ['READLOG_ASYNCLATEST'] : g.readlogAsync,
+  ['READTEST_ASYNCLATEST'] : g.readtestAsync,
+
+  ['EXPORTSVG_ASYNCLATEST'] : g.exportSVGAsync
+
 };
 
-//saga monitor
+
+//saga monitor---------------
+
 
 function* setTake(actionName, callback) {
   if(actionName.indexOf("_ASYNCLATEST") > 0){

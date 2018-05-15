@@ -1,14 +1,17 @@
-# ElectronMermaid
+# MapEditor
 
 ## Description
 
-mermaid.jpを使用しているので、GitlabのReadme.mdなどにそのまま転載可能
+トランスパイルさせてるので別に早くはないです。
 
-## WfMap
+## MapEditor
 
 
+## Markdown
 
-## mermaid gantt
+svg, mermaid.jpを使用しているので、GitlabのReadme.mdなどにそのまま転載可能
+
+### mermaid gantt
 
 ```
 gantt
@@ -16,10 +19,11 @@ gantt
   title Adding GANTT diagram functionality to mermaid
   section Lot001
     A : done,         001_1, 2014-01-06, 2014-01-08
-    B    : done, active, 001_2, 2014-01-06, 2014-01-08
-    C   : done,         001_3, 2014-01-06, 2014-01-08
-    C   :               001_4, 2014-01-06, 2014-01-08
-  ```
+    B : done, active, 001_2, 2014-01-06, 2014-01-08
+    C : done,         001_3, 2014-01-06, 2014-01-08
+    C :               001_4, 2014-01-06, 2014-01-08
+```
+
 - ForegroundColor : done, active, [null]
 - LineColor : crit, [null]
 - id :
@@ -34,16 +38,7 @@ https://github.com/kripken/sql.js/
 
 node-sqlite3は electron-rebuildしたりなど、依存関係やマルチプラットフォームでの動作の不安が多いですが、sql.jsはピュアjavascriptなので比較的安心です。
 
-# MapEditor
-
-
-## Description
-
-200CT組立用
-
-svg, mermaid.jpを使用しているので、GitlabのReadme.mdなどにそのまま転載可能
-
-# future
+## future
 
 - 左bin右クリックタブルでのmapエディター
 - mono印刷用に記号切り替え機能
