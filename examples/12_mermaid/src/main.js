@@ -5,6 +5,8 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
+const ml = require('./menulogic.js');
+
 let mainWindow;
 const configJson = require('../config.json');
 
@@ -64,20 +66,12 @@ function installMenu() {
         {
           label: 'Exit',
           accelerator: 'Ctrl+Q',
-          click () { app.quit(); }
+          click () { ml.exit(app); }
         },
         {
           label: 'PrintPDF',
           accelerator: 'Ctrl+P',
-          click () {
-            mainWindow.webContents.printToPDF({}, (error, data) => {
-              if (error) throw error
-              fs.writeFile('print.pdf', data, (error) => {
-                if (error) throw error
-                console.log('Write PDF successfully.')
-              })
-            });
-          }
+          click () { ml.printpdf(mainWindow); }
         },
         {
           label: 'ExportSVG',
@@ -91,9 +85,9 @@ function installMenu() {
     {
       label: 'View',
       submenu: [
-        { label: 'Mermaid',
+        { label: 'MAIN',
           type: 'checkbox', checked: true, click (i) { clickViewMenu(i); }
-        },{ label: 'Wf Edit',
+        },{ label: 'A4',
           type: 'checkbox', checked: false, click (i) { clickViewMenu(i); }
         },{ label: 'Wf Color',
           type: 'checkbox', checked: false, click (i) { clickViewMenu(i); }

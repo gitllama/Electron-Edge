@@ -6,6 +6,7 @@ import Immutable from 'immutable'
 
 import Welcome from './Welcome.jsx'
 import WfMap from './WfMap.jsx'
+import A4 from './A4.jsx'
 
 const loadimgstyle = {
   "position": "absolute",
@@ -25,6 +26,8 @@ class App extends React.Component {
       switch(i){
         case "MAIN":
           return ( <Welcome /> );
+        case "A4":
+          return ( <A4 /> );
         default:
           return ( <WfMap /> );
       }
