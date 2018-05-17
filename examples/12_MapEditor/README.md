@@ -12,10 +12,12 @@
       ├ [action]     : only createActions only
       ├ [reducers]   : initialState / reducers(only 'REDUCER_CHANGE')
       ├ [sagas]      : Sagas
-      ├ [components] 
+      ├ [components]
       ├ [logic]      : render process logic
       └ [img]
 ```
+
+
 
 ## MapEditor
 

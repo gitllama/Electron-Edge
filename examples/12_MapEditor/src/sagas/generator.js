@@ -4,9 +4,14 @@ import actions from '../actions';
 import fs from 'fs';
 import * as markedex from '../logic/marked-ex.js';
 import * as logmatch from '../logic/logmatch.js';
+import wfmap from '../logic/wfmap.js'
 
 const WfNo = 1;
 const wfno_dummy = 1;
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 // !! SubComponents内で呼ぶ関数はDidMountにbusy入れると
 // 無限ループしがちだよ
@@ -16,13 +21,25 @@ export function* exportSVGAsync(action) {
     (state)=> state.withMutations(m => m.set('busy', true))
   ));
 
-  // var f1 = fetch("/").then(e => e.text())
-  // var f2 = fetch("/test.jpg").then(e => e.blob())
-  // var text = yield f1
-  // console.log(text.substr(0,14))
-  // var blob = yield f2
+  let mapdata = yield select(state => state.get("wfmap"))
+  let mapconfig = yield select(state => state.get("mapconfig"))
+  let wfselect = yield select(state => state.get("wfselect"))
 
-  //fs.writeFileSync("", node.outerHTML)
+  let dst;
+  dst = wfmap.renderLegend(mapconfig, null)
+  fs.writeFileSync("legend.svg", dst)
+  wfselect.forEach((i)=>{
+    let wfstate = mapdata[i];
+    if(wfstate){
+      let hoge = Object.keys(wfstate).map((i)=> {return {
+        "x" : wfstate[i]["x"],
+        "y" : wfstate[i]["y"],
+        "text" : wfstate[i]["bin"]
+      }});
+      dst = wfmap.render(Object.assign({ "chip" :hoge }, mapconfig), null)
+      fs.writeFileSync(`${i}.svg`, dst)
+    }
+  })
   console.log('save successful!');
 
   yield put(actions.reducerChange(
@@ -124,6 +141,8 @@ export function* readtestAsync(action) {
 
 
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+// var f1 = fetch("/").then(e => e.text())
+// var f2 = fetch("/test.jpg").then(e => e.blob())
+// var text = yield f1
+// console.log(text.substr(0,14))
+// var blob = yield f2

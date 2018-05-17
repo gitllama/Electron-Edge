@@ -52,9 +52,8 @@ function GetDateNow(){
   const d = now.getDate();
   const w = now.getDay();
 
-  // // 曜日の表記を文字列の配列で指定
+
   // var wNames = ['日', '月', '火', '水', '木', '金', '土'];
-  //
   // // 「月」と「日」で1桁だったときに頭に 0 をつける
   // if (m < 10) {
   //   m = '0' + m;
@@ -63,7 +62,6 @@ function GetDateNow(){
   //   d = '0' + d;
   // }
 
-  // フォーマットを整形してコンソールに出力
   return `${y}-${m}-${d}`;
 }
 
@@ -88,7 +86,7 @@ function footer(){
     <div style={footercss}>
       <div style={mapline}>
         <div>
-          FOR 工程名
+          TO: 工程名
         </div>
         <div>
 

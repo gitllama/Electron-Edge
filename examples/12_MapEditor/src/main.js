@@ -26,12 +26,14 @@ function createWindow () {
   }));
   installMenu();
 
-  //コマンドラインオプションの確認
   if(configJson["window"]["devTool"])
     mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', function () {
     mainWindow = null
+  });
+  mainWindow.webContents.on('did-finish-load', function() {
+    mainWindow.webContents.send('INIT_ASYNCLATEST', configJson);
   });
   setShortcut(configJson);
 };
@@ -54,6 +56,14 @@ process.on('uncaughtException', function (error) {
     console.error(error);
 });
 
+//render -> main by ipc
+// electron.ipcMain.on('async', function( event, args ){
+//   //let url = location.href//process.argv[1];
+//   //console.log(url)
+//   mainWindow.webContents.send('return', configJson);
+// });
+
+
 function installMenu() {
   const Menu = electron.Menu;
 
@@ -67,6 +77,20 @@ function installMenu() {
           click () { ml.exit(app); }
         },
         {
+          label: 'FileOpen',
+          click () {
+            let filenames = electron.dialog.showOpenDialog(null, {
+                properties: ['openFile'],
+                title: 'Select a text file',
+                defaultPath: '.',
+                filters: [
+                    {name: 'text file', extensions: ['txt']}
+                ]
+            });
+            console.log(filenames)
+          }
+        },
+        {
           label: 'PrintPDF',
           accelerator: 'Ctrl+P',
           click () { ml.printpdf(mainWindow); }
@@ -75,7 +99,7 @@ function installMenu() {
           label: 'ExportSVG',
           accelerator: 'Ctrl+S',
           click () {
-            mainWindow.webContents.send("", "");
+            mainWindow.webContents.send("EXPORTSVG_ASYNCLATEST", "");
           }
         }
       ]

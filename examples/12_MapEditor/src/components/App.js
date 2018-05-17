@@ -20,9 +20,18 @@ const loadimgstyle = {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    const configJson = this.props.state.get("config");
+    //const configJson = this.props.state.get("config");
     //this.props.actions.readwelcomeAsynclatest(`${configJson["data"]["path"]}/welcome.md`)
   }
+  // componentDidMount() {
+  //   const ipcRenderer = require("electron").ipcRenderer;
+  //   ipcRenderer.send('async', null);
+  //     console.log("s")
+  // }
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log(prevProps);
+  //   console.log(prevState);
+  // }
   render() {
     const viewselector =(i)=>{
       switch(i){
