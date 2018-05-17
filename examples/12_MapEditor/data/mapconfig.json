@@ -1,14 +1,37 @@
 {
-  "wfsize" : 200,
-  "offsetX" : 12.2,
-  "offsetY" : 4.0,
-  "chipSizeX" : 24.8,
-  "chipSizeY" : 17.2,
-  "countX" : 9,
-  "countY" : 12,
-  "edge" : 5,
-  "notch" : 9,
-  "notchside" : 0,
+  "config" : {
+    "wfsize" : 200,
+    "offsetX" : 12.2,
+    "offsetY" : 4.0,
+    "chipSizeX" : 24.8,
+    "chipSizeY" : 17.2,
+    "countX" : 9,
+    "countY" : 12,
+    "edge" : 5,
+    "notch" : 9,
+    "notchside" : 0
+  },
+  "legend" : {
+    "note" : [
+      "NOTCH   : right",
+      "ShotNum : 54"
+    ],
+    "1" : {
+      "mark" : "o",
+      "color" : "red",
+      "background" : "gray"
+    },
+    "2" : {
+      "mark" : "x",
+      "color" : "red",
+      "background" : "white"
+    },
+    "3" : {
+      "mark" : "△",
+      "color" : "red",
+      "background" : "lightgray"
+    }
+  },
   "effective": {
     "1" : {"y" : 1, "x": 3, "wt": 22},
     "2" : {"y" : 1, "x": 4, "wt": 23},

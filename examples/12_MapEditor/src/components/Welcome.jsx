@@ -10,9 +10,10 @@ class App extends React.Component {
     super(props);
     //this.inputRef = React.createRef();
   }
-  // componentDidMount() {
-  //   //this.inputRef.current.focus();
-  // }
+  componentDidMount() {
+    //this.inputRef.current.focus();
+    //読み出し
+  }
   // getSnapshotBeforeUpdate(prevProps, prevState){
   //   return null;
   // }

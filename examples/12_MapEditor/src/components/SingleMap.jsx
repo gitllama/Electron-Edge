@@ -5,6 +5,7 @@ import actions from '../actions'
 import Immutable from 'immutable';
 import wfmap from '../logic/wfmap.js'
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -21,11 +22,11 @@ class App extends React.Component {
     const node = this.node
     const mapconfig = this.props.state.get("mapconfig");
     const lotstate = this.props.state.get("wfmap") || {};
-    const wfstate = lotstate[this.props.wfno]
+    const wfstate = lotstate[this.props.wfno];
 
     switch(this.props.mode){
       case "LEGEND":
-        wfmap.renderLegend(null, node)
+        wfmap.renderLegend(mapconfig, node)
         break;
       default:
         //configとmapのマージ
@@ -36,7 +37,7 @@ class App extends React.Component {
             "text" : wfstate[i]["bin"]
           }});
 
-          wfmap.render(Object.assign({ "chip":hoge }, mapconfig), node)
+          wfmap.render(Object.assign({ "chip" :hoge }, mapconfig), node)
         } else {
           wfmap.render(mapconfig, node)
         }

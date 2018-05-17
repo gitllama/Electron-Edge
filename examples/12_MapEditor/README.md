@@ -4,6 +4,19 @@
 
 トランスパイルさせてるので別に早くはないです。
 
+```
+[src] ┬ main.js      : main process (entry point)
+      ├ mainlogic.js : main process logic
+      ├ index.html   : render process entry point
+      ├ index.js     : render process
+      ├ [action]     : only createActions only
+      ├ [reducers]   : initialState / reducers(only 'REDUCER_CHANGE')
+      ├ [sagas]      : Sagas
+      ├ [components] 
+      ├ [logic]      : render process logic
+      └ [img]
+```
+
 ## MapEditor
 
 

@@ -10,7 +10,7 @@ const initialState = Immutable.Map({
   mapconfig : require('../../data/mapconfig.json'),
   wfmap : null,
   lotno : "0001(AS5045)",
-  wfselect : [1],
+  wfselect : [1,2,3],
   wfviewmode : "TXT | BIN"
 });
 
@@ -21,7 +21,7 @@ const reducers = {
 };
 
 export default function reducer(state = initialState, action) {
-  // console.log("reducer", action.type)
+  console.log("reducer", action.type)
   return reducers[action.type]
     ? reducers[action.type](state, action)
     : state;

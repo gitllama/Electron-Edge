@@ -22,7 +22,7 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <img src="img/logo.svg" width="32" height="32" align="right"/>
+          <img src="img/logo.svg" height="10mm" align="right"/>
           <h1 align="center">Wf Map</h1>
         </div>
         <div>

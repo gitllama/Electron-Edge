@@ -60,7 +60,8 @@ export function markdownCreate(code){
     })
 }
 
-export function mermidCreate(path){
+export function mermaidCreate(path){
+
   let filebuffer = fs.readFileSync(path);
   let db = new sql.Database(filebuffer);
   //let contents = db.exec("SELECT ID FROM test");
@@ -72,6 +73,7 @@ export function mermidCreate(path){
     dst += `    ${row.id} : ${row.id}, ${row.start_date}, ${row.end_date}\n`
   });
   db.close();
+
   let svg;
   try {
     mermaid.mermaidAPI.render(

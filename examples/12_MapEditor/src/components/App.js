@@ -20,6 +20,8 @@ const loadimgstyle = {
 class App extends React.Component {
   constructor(props) {
     super(props);
+    const configJson = this.props.state.get("config");
+    //this.props.actions.readwelcomeAsynclatest(`${configJson["data"]["path"]}/welcome.md`)
   }
   render() {
     const viewselector =(i)=>{

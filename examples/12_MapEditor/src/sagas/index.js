@@ -25,7 +25,7 @@ const takeSagas = {
     ))
   ),
 
-  ['READWELCOM_ASYNCLATEST'] : g.markdownAsync,
+  ['READWELCOME_ASYNCLATEST'] : g.markdownAsync,
   ['READSQL_ASYNCLATEST'] : g.sqlAsync,
   ['READLOG_ASYNCLATEST'] : g.readlogAsync,
   ['READTEST_ASYNCLATEST'] : g.readtestAsync,
@@ -41,11 +41,11 @@ const takeSagas = {
 function* setTake(actionName, callback) {
   if(actionName.indexOf("_ASYNCLATEST") > 0){
     yield takeLatest(actionName, callback);
-    console.log("registor :",actionName)
+    //console.log("registor :",actionName)
   }
   else if(actionName.indexOf("_ASYNC") > 0){
     yield takeEvery(actionName, callback);
-    console.log("registor :",actionName)
+    //console.log("registor :",actionName)
   }
   else{
     yield takeEvery(

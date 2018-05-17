@@ -2,23 +2,6 @@ import * as d3 from 'd3';
 
 const margin = {"top": 20, "left":20,"right":3,"bottom":20}
 
-const dummylegend = {
-  "1" : {
-    "mark" : "o",
-    "color" : "red",
-    "background" : "gray"
-  },
-  "2" : {
-    "mark" : "x",
-    "color" : "red",
-    "background" : "white"
-  },
-  "3" : {
-    "mark" : "△",
-    "color" : "red",
-    "background" : "lightgray"
-  }
-}
 
 // props.wfmode
 //  mono / color / bin
@@ -26,38 +9,6 @@ const dummylegend = {
 
 //------------------------------
 
-
-function renderLegend(code, node) {
-  let elem = node || document.createElement("svg");
-  let canvas = d3.select(elem)
-  canvas.selectAll("svg > *").remove();
-  legendCreate(dummylegend, canvas)
-
-  return elem.outerHTML;
-}
-
-//notch reserve dist
-function render(code, node) {
-  let elem = node || document.createElement("svg");
-  let canvas = d3.select(elem)
-  canvas.selectAll("svg > *").remove();
-
-  let param = parse(code);
-
-  baseCreate(param, canvas);
-  axisCreate(param, canvas);
-  wfCreate(param,  canvas);
-  gridCreate(param, canvas);
-
-  if(param["chip"]){
-    chipState(param, canvas);
-  }
-
-  return elem.outerHTML;
-}
-
-
-//------------------------------
 
 /// {
 ///   "text" : {
@@ -67,13 +18,18 @@ function render(code, node) {
 ///   }, ...
 /// }
 function legendCreate(code, canvas){
-  let json = typeof (code) == "string" ? JSON.parse(code) : code;
+  let json = typeof (code) == "string"
+    ? JSON.parse(code)
+    : JSON.parse(JSON.stringify(code['legend'])); //deepcopy
   const offsetX = 10;
   const offsetY = 10;
   const marginY = 5;
-  const Note = ["NOTCH : right", "SHOT NUM : 54"]
 
-  let y_length = Object.keys(json).length + Note.length;
+  const note = json['note']
+  console.log(json['note'])
+  delete json['note'];
+
+  let y_length = Object.keys(json).length + note.length;
 
   canvas
     .attr('xmlns', 'http://www.w3.org/2000/svg')
@@ -94,7 +50,7 @@ function legendCreate(code, canvas){
     .attr("stroke","black")
     .attr("fill", "none");
 
-  Note.forEach((n, i) =>{
+  note.forEach((n, i) =>{
     let hoge = canvas.append("g");
     let y = i * (10 + marginY) + offsetY;
     canvas.append("text")
@@ -108,7 +64,7 @@ function legendCreate(code, canvas){
   });
   Object.keys(json).forEach((n, i) =>{
     let hoge = canvas.append("g");
-    let y = (Note.length + i)  * (10 + marginY) + offsetY;
+    let y = (note.length + i)  * (10 + marginY) + offsetY;
     hoge.append("rect")
       .attr("x", offsetX)
       .attr("y", y)
@@ -169,6 +125,18 @@ function baseCreate(param, canvas){
     .attr("xmlns","http://www.w3.org/2000/svg")
     .attr("height", param.height)
     .attr("width", param.width);
+  canvas
+    .append('svg:marker')
+    .attr("id","arrow")
+    .attr('markerHeight', 5)
+    .attr('markerWidth', 5)
+    .attr('orient', "auto")
+    .attr('refX', 0)
+    .attr('refY', 0)
+    .attr('viewBox', '-5 -5 10 10')
+    .append('svg:path')
+      .attr('d', 'M 0,0 m -5,-5 L 5,0 L -5,5 Z')
+      .attr('fill', "black");
 }
 
 function axisCreate(param, canvas){
@@ -206,10 +174,11 @@ function axisCreate(param, canvas){
     .attr("font-family","sans-serif")
     .attr("font-size",12)
     .text((_, i) => i);
+
 }
 
 function gridCreate(param, canvas){
-
+  let grid = canvas.append("g");
   let x = Array.from(new Array(param.countX+1),(v,i)=>{
     return {
       "x1" : param.f_x(i),
@@ -226,8 +195,7 @@ function gridCreate(param, canvas){
       "y2" : param.f_y(i)
     }
   });
-  canvas.append("g")
-    .selectAll("line")
+  grid.selectAll("line")
     .data(x.concat(y))
     .enter()
     .append("line")
@@ -238,6 +206,42 @@ function gridCreate(param, canvas){
     .attr("stroke-width",1)
     .attr("stroke","gray")
     .attr("stroke-dasharray", "1, 1");
+}
+
+function directionCreate(param, canvas){
+  let direction = canvas.append("g");
+  let size = 15
+
+  direction.append("line")
+    .attr("x1", margin.left)
+    .attr("x2", margin.left + size)
+    .attr("y1", margin.top)
+    .attr("y2", margin.top)
+    .attr("marker-end", "url(#arrow)")
+    .attr("stroke-width",1)
+    .attr("stroke","black");
+  direction.append("line")
+    .attr("x1", margin.left)
+    .attr("x2", margin.left)
+    .attr("y1", margin.top)
+    .attr("y2", margin.top + size)
+    .attr("marker-end", "url(#arrow)")
+    .attr("stroke-width",1)
+    .attr("stroke","black");
+  direction.append("text")
+    .attr("x", margin.left + size + 2)
+    .attr("y", margin.top)
+    .attr("dominant-baseline", "hanging")
+    .attr("font-family","sans-serif")
+    .attr("font-size",10)
+    .text("x")
+  direction.append("text")
+    .attr("x", margin.left)
+    .attr("y", margin.top + size + 2)
+    .attr("dominant-baseline", "hanging")
+    .attr("font-family","sans-serif")
+    .attr("font-size",10)
+    .text("y")
 }
 
 function wfCreate(param, canvas){
@@ -356,6 +360,60 @@ function chipState(param, canvas){
   //       .text((i)=>wfmap[i]["bin"].trim());
   //   }
   }
+
+function cautionCreate(param, canvas, txt){
+  const r = param.wfsize / 2
+  const notch_w = 4
+  const cx = r + param.offsetX;
+  const cy = r + param.offsetY;
+  let caution = canvas.append("g");
+  caution.append("text")
+    .attr("x", cx)
+    .attr("y", cy)
+    .attr("text-anchor", "middle")
+    .attr("dominant-baseline", "middle")
+    .attr("font-family","sans-serif")
+    .attr("fill","red")
+    .attr("font-size",32)
+    .text(txt);
+}
+//------------------------------
+
+
+function renderLegend(code, node) {
+  let elem = node || document.createElement("svg");
+  let canvas = d3.select(elem)
+  canvas.selectAll("svg > *").remove();
+  let json = typeof (code) == "string" ? JSON.parse(code) : code;
+  legendCreate(json, canvas)
+
+  return elem.outerHTML;
+}
+
+//notch reserve dist
+function render(code, node) {
+  let elem = node || document.createElement("svg");
+  let canvas = d3.select(elem)
+  canvas.selectAll("svg > *").remove();
+
+  let param = parse(code);
+
+  baseCreate(param, canvas);
+  wfCreate(param,  canvas);
+  axisCreate(param, canvas);
+
+  if(param["chip"]){
+    gridCreate(param, canvas);
+    directionCreate(param, canvas);
+    chipState(param, canvas);
+  }else{
+    cautionCreate(param, canvas, "No Wf")
+    //cautionCreate(param, canvas, "")
+  }
+
+  return elem.outerHTML;
+}
+
 
 export default {
   render,

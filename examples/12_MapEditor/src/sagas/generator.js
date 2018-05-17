@@ -8,6 +8,8 @@ import * as logmatch from '../logic/logmatch.js';
 const WfNo = 1;
 const wfno_dummy = 1;
 
+// !! SubComponents内で呼ぶ関数はDidMountにbusy入れると
+// 無限ループしがちだよ
 
 export function* exportSVGAsync(action) {
   yield put(actions.reducerChange(
@@ -46,9 +48,7 @@ export function* sqlAsync(action) {
     (state)=> state.withMutations(m => m.set('busy', true))
   ));
 
-  const config = yield select(state => state.get("config"))
-  const filepath = action.payload;
-  let svg = markedex.mermidCreate(action.payload)
+  let svg = markedex.mermaidCreate(action.payload)
 
   yield put(actions.reducerChange(
     (state)=> state.withMutations(m => m.set('html', svg).set('busy', false))
@@ -71,7 +71,7 @@ export function* readlogAsync(action) {
 
   let dst = {};
   let wfselect = yield select(state => state.get("wfselect"))
-  wfselect.forEach((n) => getBin(path, n, wt2chip, dst))
+  wfselect.forEach((n) => logmatch.getBin(path, n, wt2chip, dst))
   yield put(actions.reducerChange(
     (state)=> state.withMutations(m => m.set('wfmap', dst))
   ));
@@ -94,8 +94,8 @@ export function* readtestAsync(action) {
       let start = wfmap[wfno][chipno]["start"]
       let end = wfmap[wfno][chipno]["end"]
       //let wtco = wfmap[wfno][chipno]["wt"]
-      let dst = getMeasured(arr, start, end, "OS_Pch", "VDDCELL")
-      wfmap[wfno][chipno]["result"] = unitParseFloat(dst);
+      let dst = logmatch.getMeasured(arr, start, end, "OS_Pch", "VDDCELL")
+      wfmap[wfno][chipno]["result"] = logmatch.unitParseFloat(dst);
     })
   });
 

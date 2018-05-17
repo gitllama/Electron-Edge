@@ -5,13 +5,11 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
-const ml = require('./menulogic.js');
-
 let mainWindow;
 const configJson = require('../config.json');
+const ml = require('./mainlogic.js');
 
 function createWindow () {
-  //const configJson = require('../config.json');
   mainWindow = new BrowserWindow({
     title: app.getName(),
     width: configJson["window"]["width"],
@@ -86,13 +84,21 @@ function installMenu() {
       label: 'View',
       submenu: [
         { label: 'MAIN',
-          type: 'checkbox', checked: true, click (i) { clickViewMenu(i); }
+          type: 'checkbox',
+          checked: true,
+          click (i) { ml.clickViewMenu(mainWindow, i); }
         },{ label: 'A4',
-          type: 'checkbox', checked: false, click (i) { clickViewMenu(i); }
+          type: 'checkbox',
+          checked: false,
+          click (i) { ml.clickViewMenu(mainWindow, i); }
         },{ label: 'Wf Color',
-          type: 'checkbox', checked: false, click (i) { clickViewMenu(i); }
+          type: 'checkbox',
+          checked: false,
+          click (i) { ml.clickViewMenu(mainWindow, i); }
         },{ label: 'Wf Mono',
-          type: 'checkbox', checked: false, click (i) { clickViewMenu(i); }
+          type: 'checkbox',
+          checked: false,
+          click (i) { ml.clickViewMenu(mainWindow, i); }
         }
       ]
     },
@@ -100,9 +106,9 @@ function installMenu() {
       label: 'Debug',
       submenu: [
         {
-          label: 'READ WELCOM',
+          label: 'READ WELCOME',
           click () { mainWindow.webContents.send(
-            "READWELCOM_ASYNCLATEST",
+            "READWELCOME_ASYNCLATEST",
             `${configJson["data"]["path"]}/welcome.md`
           );}
         },
@@ -126,16 +132,6 @@ function installMenu() {
   ]));
 }
 
-function clickViewMenu(item){
-  const menu = electron.Menu.getApplicationMenu();
-  menu.items["View"]
-  let result = menu.items.filter((i)=>{
-    return i.label == 'View';
-  })
-  result[0].submenu.items.forEach((i)=>{i.checked = false});
-  item.checked = true;
-  mainWindow.webContents.send("VIEW_CHANGE", item.label);
-}
 
 function setShortcut(config){
   const globalShortcut = electron.globalShortcut;
