@@ -8,35 +8,12 @@ import Immutable from 'immutable';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    //this.inputRef = React.createRef();
   }
-  componentDidMount() {
-    //this.inputRef.current.focus();
-    //読み出し
-  }
-  // getSnapshotBeforeUpdate(prevProps, prevState){
-  //   return null;
-  // }
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   // if (nextProps.txt !== "") {
-  //   //   return {
-  //   //     count: prevState.count+1
-  //   //   }
-  //   // }
-  //   return null;
-  // }
-  // componentDidUpdate(prevProps, prevState) {
-  //   // console.log(prevProps.txt);
-  //   // console.log(prevState.count);
-  // }
-  // onChangeState(e){
-  //   //this.setState({ world: e.target.value });
-  // }
   render() {
     let html = this.props.state.get("html");
     return (
       <div>
-        <img src="img/logo.svg" width="32" height="32" align="right"/>
+        <img src="img/logo.svg" height="20mm" align="right"/>
         {
           (html != null)
             ? (<div dangerouslySetInnerHTML={{__html: html}} />)

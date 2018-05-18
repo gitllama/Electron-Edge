@@ -32,6 +32,24 @@ class App extends React.Component {
   //   console.log(prevProps);
   //   console.log(prevState);
   // }
+  // getSnapshotBeforeUpdate(prevProps, prevState){
+  //   return null;
+  // }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   // if (nextProps.txt !== "") {
+  //   //   return {
+  //   //     count: prevState.count+1
+  //   //   }
+  //   // }
+  //   return null;
+  // }
+  // componentDidUpdate(prevProps, prevState) {
+  //   // console.log(prevProps.txt);
+  //   // console.log(prevState.count);
+  // }
+  // onChangeState(e){
+  //   //this.setState({ world: e.target.value });
+  // }
   render() {
     const viewselector =(i)=>{
       switch(i){

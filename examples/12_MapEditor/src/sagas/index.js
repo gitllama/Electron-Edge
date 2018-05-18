@@ -13,7 +13,7 @@ const takeSagas = {
   // ['PATTERN_D_INC_ASYNC'] : incAsync, //連射すると遅れてまとめて帰ってくる
   // ['PATTERN_D_INC_ASYNCLATEST'] : incAsync, //最後だけ返る（すでに動いてても呼び出しは起こる）
 
-  ['INIT_ASYNCLATEST'] : init,
+  ['INIT_ASYNCLATEST'] : g.init,
 
   ['VIEW_CHANGE'] : (state, action) => (
     state.withMutations(m => (
@@ -36,15 +36,6 @@ const takeSagas = {
 
 };
 
-function* init(action) {
-  yield put(actions.reducerChange(
-    (state)=> state.withMutations(m =>
-      m.set('busy', false)
-      .set('config', action.payload)
-      .set('mapconfig',action.payload["defaultmap"])
-    )
-  ));
-}
 
 //saga monitor---------------
 

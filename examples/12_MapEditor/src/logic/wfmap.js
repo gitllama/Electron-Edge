@@ -10,13 +10,6 @@ const margin = {"top": 20, "left":20,"right":3,"bottom":20}
 //------------------------------
 
 
-/// {
-///   "text" : {
-///     mark : "",
-///     color : "",
-///     background : "",
-///   }, ...
-/// }
 function legendCreate(code, canvas){
   let json = typeof (code) == "string"
     ? JSON.parse(code)
@@ -26,8 +19,9 @@ function legendCreate(code, canvas){
   const marginY = 5;
 
   const note = json['note']
-  console.log(json['note'])
+  const colorscale = json['colorscale']
   delete json['note'];
+  delete json['colorscale'];
 
   let y_length = Object.keys(json).length + note.length;
 
@@ -95,11 +89,28 @@ function legendCreate(code, canvas){
 
 //------------------------------
 
+function checkObject(obj, arr){
+  let dst = null;
+  if(arr.length > 1){
+    if(obj[arr[0]]){
+      let hoge = arr.slice()
+      hoge.shift()
+      return checkObject(obj[arr[0]],hoge)
+    }else{
+      return null;
+    }
+  }
+  return obj[arr[0]];
+}
 
 function parse(code){
   let json = typeof (code) == "string" ? JSON.parse(code) : code;
+
   return {
     title : json["title"] || "",
+    caution : json["caution"],
+    legend : json["legend"],
+
     countX : json["config"]["countX"],
     countY : json["config"]["countY"],
     chipSizeX : json["config"]["chipSizeX"],
@@ -109,7 +120,7 @@ function parse(code){
     offsetX : json["config"]["offsetX"] + margin.left,
     offsetY : json["config"]["offsetY"] + margin.top,
     edge : json["config"]["edge"],
-    notch : json["config"]["notch"],
+    notch : json["config"]["notch"], //notch reserve dist
     notchside : json["config"]["notchside"],
     wfsize : json["config"]["wfsize"],
     chip : json["chip"],
@@ -289,6 +300,18 @@ function chipState(param, canvas){
   let enableTXT = true;
   let chipmap = canvas.append("g");
 
+  let mode = null;
+  if(param.legend){
+    mode = param.legend["mode"] || null;
+  }
+
+  let colorScaler;
+  if(mode == "colorscale"){
+    colorScaler = d3.scaleLinear()
+      .domain(param.legend["colorscale"]["domain"])    //　入力データ範囲：-1～1
+      .range(param.legend["colorscale"]["range"]) //　出力色範囲： 赤―黄色―緑
+  }
+
   chipmap.selectAll("rect")
     .data(chips)
     .enter()
@@ -299,7 +322,25 @@ function chipState(param, canvas){
     .attr("height", param.chipSizeY)
     .attr("stroke-width",1)
     .attr("stroke","black")
-    .attr("fill",(n)=> param.chip[n]["background"] || "lightgray");
+    .attr("fill",(n)=> {
+      if(param.chip[n]["background"]){
+        return param.chip[n]["background"]
+      }else{
+        switch(param["legend"]["mode"]){
+          case "mark":
+            return checkObject(
+              param.legend,
+              ["mark", param.chip[n]["value"], "background"]
+            ) || "lightgray";
+          case "colorscale":
+            return colorScaler(parseFloat(param.chip[n]["value"]));
+          default:
+            return "lightgray"
+        }
+      }
+    })
+    .append("title")
+    .text((n)=> param.chip[n]["value"] || "");
 
   if(enableTXT){
     chipmap.selectAll("TEXT")
@@ -312,54 +353,12 @@ function chipState(param, canvas){
       .attr("dominant-baseline", "middle")
       .attr("font-family","sans-serif")
       .attr("font-size",12)
-      .text((n)=> param.chip[n]["text"] || "");
+      .text((n)=> param.chip[n]["value"] || "");
   }
 
-  // const chipnos = null//this.props.state.get(mapconfig)["effective"]
-  // const keys = null//Object.keys(wfmap)
-  //
-  //   const mode = this.props.wfmode.split("|")
-  //   let selected = mode.some((e, i, a)=> e.trim() == "BIN") ? "bin"
-  //     : mode.some((e, i, a)=> e.trim() == "RESULT") ? "result"
-  //     : mode.some((e, i, a)=> e.trim() == "WT") ? "wt" : ""
-  //   let enableTXT = mode.some((e, i, a)=> e.trim() == "TEXT")
-  //
-  //   let canvas = wf.append("g");
-  //   canvas.selectAll("rect")
-  //   	.data(keys)
-  //   	.enter()
-  //     .append("rect")
-  //     .attr("x",(i)=> chipSizeX * chipnos[i]["x"] + margin.left)
-  //     .attr("y",(i)=> chipSizeY * chipnos[i]["y"] + margin.top)
-  //     .attr("width",chipSizeX)
-  //     .attr("height",chipSizeY)
-  //     .attr("stroke-width",1)
-  //     .attr("stroke","black")
-  //     .attr("fill",(i)=>{
-  //       switch (wfmap[i]["bin"].trim()) {
-  //         case "2":
-  //           return "black";
-  //         case "3":
-  //           return "white";
-  //         default:
-  //           return "lightgray";
-  //         }
-  //     });
-  //
-  //   if(enableTXT){
-  //     canvas.selectAll("TEXT")
-  //     	.data(keys)
-  //     	.enter()
-  //       .append("text")
-  //       .attr("x",(i)=> chipSizeX * (chipnos[i]["x"]+0.5) + margin.left)
-  //       .attr("y",(i)=> chipSizeY * (chipnos[i]["y"]+0.5) + margin.top)
-  //       .attr("text-anchor", "middle")
-  //       .attr("dominant-baseline", "middle")
-  //       .attr("font-family","sans-serif")
-  //       .attr("font-size",12)
-  //       .text((i)=>wfmap[i]["bin"].trim());
-  //   }
-  }
+}
+
+
 
 function cautionCreate(param, canvas, txt){
   const r = param.wfsize / 2
@@ -377,6 +376,7 @@ function cautionCreate(param, canvas, txt){
     .attr("font-size",32)
     .text(txt);
 }
+
 //------------------------------
 
 
@@ -390,7 +390,7 @@ function renderLegend(code, node) {
   return elem.outerHTML;
 }
 
-//notch reserve dist
+
 function render(code, node) {
   let elem = node || document.createElement("svg");
   let canvas = d3.select(elem)
@@ -410,6 +410,9 @@ function render(code, node) {
     cautionCreate(param, canvas, "No Wf")
     //cautionCreate(param, canvas, "")
   }
+
+  if(param["caution"])
+    cautionCreate(param, canvas, param["caution"])
 
   return elem.outerHTML;
 }

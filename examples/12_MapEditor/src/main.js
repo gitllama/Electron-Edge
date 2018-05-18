@@ -87,7 +87,17 @@ function installMenu() {
                     {name: 'text file', extensions: ['txt']}
                 ]
             });
-            console.log(filenames)
+          }
+        },
+        {
+          label: 'DatalogDirectoryOpen',
+          click () {
+            let dst = electron.dialog.showOpenDialog(null, {
+                properties: ['openDirectory'], //multiSelections
+                title: 'DatalogDirectoryOpen',
+                defaultPath: '.'
+            });
+            mainWindow.webContents.send("READLOG_ASYNCLATEST", dst);
           }
         },
         {
@@ -143,10 +153,7 @@ function installMenu() {
             `${configJson["data"]["path"]}/DB.db`
            ); }
         },
-        {
-          label: 'READLOG_ASYNCLATEST',
-          click () { mainWindow.webContents.send("READLOG_ASYNCLATEST", "READLOG_ASYNCLATEST"); }
-        },
+
         {
           label: 'READTEST_ASYNCLATEST',
           click () { mainWindow.webContents.send("READTEST_ASYNCLATEST", "READTEST_ASYNCLATEST"); }

@@ -4,6 +4,20 @@ import Immutable from 'immutable';
 import sql from 'sql.js';
 import fs from 'fs';
 
+const rDevice = /Device#:(\s\d+)$/;
+const rEnd = /^=========================================================================$/;
+const reg = /^(.{12})(.{6})(.{9})(.{26})(.{15})(.{10})(.{15})(.{15})(.{15})(.{15})/;
+const rNumber = 1;
+const rSite = 2;
+const rResult = 3;
+const rTestName = 4;
+const rPin = 5;
+const rChannel = 6;
+const rLow = 7;
+const rMeasured = 8;
+const rHigh = 9;
+const rForce = 10;
+
 
 //------------------------------
 
@@ -27,52 +41,69 @@ export function unitParseFloat(val){
 }
 
 export function getBin(path, wfno, wt2chip, dst){
-  const rDevice = /Device#:(\s\d+)$/;
-  const rEnd = /^=========================================================================$/;
-
-  let txt = fs.readFileSync(path).toString();
-  let arr = txt.split(/\r\n|\r|\n/);
-
-  let chipno = null;
   let wfnostr = `${wfno}`;
-  dst[wfnostr] = {};
+  try {
 
-  arr.forEach((v, i, a)=>{
-    if(chipno == null){
-      //startの検索
-      let result = v.match(rDevice);
-      if(result != null) {
-        //一致するchipnoの取得
-        let devno = `${result[1]}`.trim();
-        chipno = wt2chip[devno]["n"]
-        dst[wfnostr][chipno] = {}
-        dst[wfnostr][chipno]["start"] = i
-        dst[wfnostr][chipno]["x"] = wt2chip[devno]["x"]
-        dst[wfnostr][chipno]["y"] = wt2chip[devno]["y"]
-        dst[wfnostr][chipno]["wt"] = devno
+    let txt = fs.readFileSync(path).toString();
+    let arr = txt.split(/\r\n|\r|\n/);
+
+    let chipno = null;
+    dst[wfnostr] = {};
+    arr.forEach((line, i, a)=>{
+      if(chipno == null){
+        //startの検索
+        let result = line.match(rDevice);
+        if(result != null) {
+          //一致するchipnoの取得
+          let devno = `${result[1]}`.trim();
+          chipno = wt2chip[devno]["n"]
+          dst[wfnostr][chipno] = {}
+          //dst[wfnostr][chipno]["start"] = i
+          dst[wfnostr][chipno]["x"] = wt2chip[devno]["x"]
+          dst[wfnostr][chipno]["y"] = wt2chip[devno]["y"]
+          dst[wfnostr][chipno]["wt"] = devno
+        }
+      }else{
+        if(line.match(rEnd) != null) {
+          //dst[wfnostr][chipno]["end"] = i
+          dst[wfnostr][chipno]["bin"] = a[i-1].split(/\s+/)[3]; //get bin no (1site only)
+          chipno = null;
+        }else{
+          isTestResult(line, dst[wfnostr][chipno])
+        }
       }
-    }else{
-      if(v.match(rEnd) != null) {
-        dst[wfnostr][chipno]["end"] = i
-        dst[wfnostr][chipno]["bin"] = a[i-1].split(/\s+/)[3]; //get bin no (1site only)
-        chipno = null;
-      }
-    }
-  });
+    });
+
+  } catch (err) {
+    console.log(err)
+    //dst[wfnostr] = {};
+
+  }
 }
 
+function isTestResult(line, dst){
+  //先頭rNumberが数字ならテストと判断
+  let m = line.match(reg);
+  if(m != null){
+    if(!isNaN(m[rNumber])){
+      dst[`${m[rTestName].trim()} ${m[rPin].trim()}`] = {
+        "Result" : m[rResult].trim(),
+        "Measured" : m[rMeasured].trim()
+      }
+    }
+  }
+}
+
+// // map[chipno.toString()] = {};
+// Object.keys(wfmap[wfno]).forEach((chipno)=>{
+//   let start = wfmap[wfno][chipno]["start"]
+//   let end = wfmap[wfno][chipno]["end"]
+//   //let wtco = wfmap[wfno][chipno]["wt"]
+//   let dst = logmatch.getMeasured(arr, start, end, "OS_Pch", "VDDCELL")
+//   wfmap[wfno][chipno]["result"] = logmatch.unitParseFloat(dst);
+// })
 export function getMeasured(arr, start, end, testname, pinname){
-  const reg = /^(.{12})(.{6})(.{9})(.{26})(.{15})(.{10})(.{15})(.{15})(.{15})(.{15})/;
-  const rNumber = 1;
-  const rSite = 2;
-  const rResult = 3;
-  const rTestName = 4;
-  const rPin = 5;
-  const rChannel = 6;
-  const rLow = 7;
-  const rMeasured = 8;
-  const rHigh = 9;
-  const rForce = 10;
+
 
   for(let i = start;  i < end;  i++  ) {
     let dst = arr[i].match(reg);
@@ -84,7 +115,23 @@ export function getMeasured(arr, start, end, testname, pinname){
 }
 
 //------------------------------
-
+// wt2chip[`${mapconfig[n]["wt"]}`] = `${n}`)
+//
+// wfselect.forEach((w)=>{
+//   map[w.toString()] = {};
+//   Object.keys(mapconfig).forEach((chip)=>{
+//     let wtco = mapconfig[chip]["wt"]
+//     let dst = getMeasured(
+//       arr,
+//       dic[wfno][wtco]["start"],
+//       dic[wfno][wtco]["end"],
+//       "OS_Pch", "VDDCELL"
+//     );
+//
+//     map[w.toString()][chip.toString()] = unitParseFloat(dst);
+//
+//   })
+// });
 
 
 

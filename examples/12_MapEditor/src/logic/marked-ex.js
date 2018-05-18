@@ -31,22 +31,22 @@ export function markdownCreate(code){
   // },
   let highlight = function(code, lang, callback){
     let dst;
-    switch(lang){
-      case 'mermaid':
-        try {
-          mermaid.mermaidAPI.render(
-            `mermaid-${Date.now()}`,
-            code,
-            (svgCode)=>( dst = svgCode )
-          )
-        } catch(error) {
-          dst = code;
-        }
-        return dst;
-      case 'wfmap':
-        return wfmap.render(code);
-      default:
-        break;
+    try {
+      switch(lang){
+        case 'mermaid':
+            mermaid.mermaidAPI.render(
+              `mermaid-${Date.now()}`,
+              code,
+              (svgCode)=>( dst = svgCode )
+            )
+          return dst;
+        case 'wfmap':
+          return wfmap.render(code);
+        default:
+          break;
+      }
+    } catch(error) {
+      dst = code;
     }
   };
 

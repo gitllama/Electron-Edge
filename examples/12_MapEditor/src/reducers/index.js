@@ -8,6 +8,7 @@ const initialState = Immutable.Map({
   html : null,
 
   mapconfig : null,
+  wfresult : null,
   wfmap : null,
   lotno : "0001(AS5045)",
   wfselect : [1,2,3],

@@ -6,8 +6,6 @@ import * as markedex from '../logic/marked-ex.js';
 import * as logmatch from '../logic/logmatch.js';
 import wfmap from '../logic/wfmap.js'
 
-const WfNo = 1;
-const wfno_dummy = 1;
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -15,6 +13,28 @@ function sleep(ms) {
 
 // !! SubComponents内で呼ぶ関数はDidMountにbusy入れると
 // 無限ループしがちだよ
+
+export function* init(action) {
+  //mapconfigの作成
+  const defaultmap = action.payload["defaultmap"]
+
+  let dst = {"wt2chip" :{} }
+  Object.keys(defaultmap["effective"]).forEach((n)=> (
+    dst["wt2chip"][`${defaultmap["effective"][n]["wt"]}`] = {
+      "n" : `${n}`,
+      "x" : defaultmap["effective"][n]["x"],
+      "y" : defaultmap["effective"][n]["y"]
+  }));
+  const mapconfig = Object.assign(dst, defaultmap)
+
+  yield put(actions.reducerChange(
+    (state)=> state.withMutations(m =>
+      m.set('busy', false)
+      .set('config', action.payload)
+      .set('mapconfig',mapconfig)
+    )
+  ));
+}
 
 export function* exportSVGAsync(action) {
   yield put(actions.reducerChange(
@@ -73,70 +93,58 @@ export function* sqlAsync(action) {
 }
 
 export function* readlogAsync(action) {
-  let config = yield select(state => state.get("config"))
-  let mapconfig = yield select(state => state.get("mapconfig")["effective"])
-  let wt2chip = {}
 
-  let path = `${config["data"]["path"]}/Datalog_${("00" + wfno_dummy).slice( -2 )}.txt`;
+  let path = action.payload
+  //let path = yield select(state => state.get("config")["data"]["path"])
+  let wt2chip = yield select(state => state.get("mapconfig")["wt2chip"])
 
-  Object.keys(mapconfig).forEach((n)=> (
-    wt2chip[`${mapconfig[n]["wt"]}`] = {
-      "n" : `${n}`,
-      "x" : mapconfig[n]["x"],
-      "y" : mapconfig[n]["y"]
-  }));
+  let wfselect = [...new Array(54)].map((_,i)=>i+1)
+  //let wfselect = yield select(state => state.get("wfselect"))
 
   let dst = {};
-  let wfselect = yield select(state => state.get("wfselect"))
-  wfselect.forEach((n) => logmatch.getBin(path, n, wt2chip, dst))
-  yield put(actions.reducerChange(
-    (state)=> state.withMutations(m => m.set('wfmap', dst))
-  ));
-}
-
-export function* readtestAsync(action) {
-
-  let config = yield select(state => state.get("config"))
-  const path =(n)=>(`${config["data"]["path"]}/Datalog_${("00" + n).slice( -2 )}.txt`);
-
-  let wfmap = yield select(state => state.get("wfmap"))
-
-  Object.keys(wfmap).forEach((wfno)=>{
-    let filepath = path(wfno_dummy);
-    let txt = fs.readFileSync(filepath).toString();
-    let arr = txt.split(/\r\n|\r|\n/);
-
-    // map[chipno.toString()] = {};
-    Object.keys(wfmap[wfno]).forEach((chipno)=>{
-      let start = wfmap[wfno][chipno]["start"]
-      let end = wfmap[wfno][chipno]["end"]
-      //let wtco = wfmap[wfno][chipno]["wt"]
-      let dst = logmatch.getMeasured(arr, start, end, "OS_Pch", "VDDCELL")
-      wfmap[wfno][chipno]["result"] = logmatch.unitParseFloat(dst);
-    })
+  wfselect.forEach((wfno) =>{
+    logmatch.getBin(
+      `${path}/Datalog_${("00" + wfno).slice( -2 )}.txt`,
+      wfno,
+      wt2chip,
+      dst
+    )
   });
 
   yield put(actions.reducerChange(
-    (state)=> state.withMutations(m => m.set('wfmap', wfmap))
+    (state)=> state.withMutations(m => m.set('wfresult', dst))
   ));
 
-  // wt2chip[`${mapconfig[n]["wt"]}`] = `${n}`)
-  //
-  // wfselect.forEach((w)=>{
-  //   map[w.toString()] = {};
-  //   Object.keys(mapconfig).forEach((chip)=>{
-  //     let wtco = mapconfig[chip]["wt"]
-  //     let dst = getMeasured(
-  //       arr,
-  //       dic[wfno][wtco]["start"],
-  //       dic[wfno][wtco]["end"],
-  //       "OS_Pch", "VDDCELL"
-  //     );
-  //
-  //     map[w.toString()][chip.toString()] = unitParseFloat(dst);
-  //
-  //   })
-  // });
+  //最後にbinでのwfmapの生成
+  yield readtestAsync({payload : "bin"})
+
+}
+
+export function* readtestAsync(action) {
+  let config = yield select(state => state.get("mapconfig")["config"])
+  let legend = yield select(state => state.get("mapconfig")["legend"])
+  let wfresult = yield select(state => state.get("wfresult"))
+
+  let dst = {};
+  Object.keys(wfresult).forEach((wf)=>{
+    dst[wf] = {};
+    dst[wf]["title"] = `Wf${wf}`;
+    dst[wf]["config"] = config;
+    dst[wf]["legend"] = legend;
+    dst[wf]["chip"] = {}
+    let hoge = dst[wf]["chip"]
+    Object.keys(wfresult[wf]).forEach((chip)=>{
+      hoge[chip] = {};
+      hoge[chip]["x"] = wfresult[wf][chip]["x"];
+      hoge[chip]["y"] = wfresult[wf][chip]["y"];
+      hoge[chip]["value"] = wfresult[wf][chip][action.payload];
+      hoge[chip]["background"] = wfresult[wf][chip]["background"] || "auto";
+    })
+  })
+
+  yield put(actions.reducerChange(
+    (state)=> state.withMutations(m => m.set('wfmap', dst))
+  ));
 }
 
 

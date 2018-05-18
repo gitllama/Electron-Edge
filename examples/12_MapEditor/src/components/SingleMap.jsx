@@ -31,13 +31,7 @@ class App extends React.Component {
       default:
         //configとmapのマージ
         if(wfstate){
-          let hoge = Object.keys(wfstate).map((i)=> {return {
-            "x" : wfstate[i]["x"],
-            "y" : wfstate[i]["y"],
-            "text" : wfstate[i]["bin"]
-          }});
-
-          wfmap.render(Object.assign({ "chip" :hoge }, mapconfig), node)
+          wfmap.render(wfstate, node)
         } else {
           wfmap.render(mapconfig, node)
         }
