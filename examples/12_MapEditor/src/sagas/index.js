@@ -4,15 +4,10 @@ import Immutable from 'immutable';
 
 import * as g from './generator.js';
 
+// ['ACTION_NAME_THROUGH']
+// ['ACTION_NAME_ASYNC']       : 連射すると遅れてまとめて帰ってくる
+// ['ACTION_NAME_ASYNCLATEST'] : 最後だけ返る（すでに動いてても呼び出しは起こる）
 const takeSagas = {
-  // ['PATTERN_D_THROUGH'] : (state, action)=>(
-  //   state.withMutations(m => (
-  //     m.set('count', state.get("count")+1)
-  //   ))
-  // ),
-  // ['PATTERN_D_INC_ASYNC'] : incAsync, //連射すると遅れてまとめて帰ってくる
-  // ['PATTERN_D_INC_ASYNCLATEST'] : incAsync, //最後だけ返る（すでに動いてても呼び出しは起こる）
-
   ['INIT_ASYNCLATEST'] : g.init,
 
   ['VIEW_CHANGE'] : (state, action) => (
@@ -21,11 +16,7 @@ const takeSagas = {
     ))
   ),
 
-  ['SHORTCUT_INC'] : (state, action)=>(
-    state.withMutations(m => (
-      m.set('count', state.get("count")+1)
-    ))
-  ),
+  ['SELECT_LEGEND_ASYNCLATEST'] : g.selectlegendAsync,
 
   ['READWELCOME_ASYNCLATEST'] : g.markdownAsync,
   ['READSQL_ASYNCLATEST'] : g.sqlAsync,
@@ -37,8 +28,7 @@ const takeSagas = {
 };
 
 
-//saga monitor---------------
-
+// saga monitor
 
 function* setTake(actionName, callback) {
   if(actionName.indexOf("_ASYNCLATEST") > 0){

@@ -13,7 +13,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(sagaMiddleware))
 sagaMiddleware.run(rootSaga)
 
-//var ipc = require('ipc');
+
 const ipcRenderer = require("electron").ipcRenderer;
 Object.keys(actions).forEach((key)=>{
   ipcRenderer.on(actions[key].toString(), (event, param) =>{
@@ -23,19 +23,6 @@ Object.keys(actions).forEach((key)=>{
     });
   })
 });
-
-//ipc
-// ipcRenderer.on("return", (event, param) =>{
-//   actions.reducerChange(
-//     (state)=> state.withMutations(m =>
-//       m.set('config', param)
-//         .set('mapconfig', param["defaultmap"])
-//         .set('busy' : false)
-//     )
-//   )
-//   console.log(param)
-// })
-//ipcRenderer.send('async', null);
 
 
 ReactDOM.render(

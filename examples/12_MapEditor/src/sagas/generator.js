@@ -11,8 +11,15 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// !! SubComponents内で呼ぶ関数はDidMountにbusy入れると
-// 無限ループしがちだよ
+function readfile(){
+  // var f1 = fetch("/").then(e => e.text())
+  // var f2 = fetch("/test.jpg").then(e => e.blob())
+  // var text = yield f1
+  // console.log(text.substr(0,14))
+  // var blob = yield f2
+}
+
+// !! SubComponents内で呼ぶ関数はDidMountにbusy入れると無限ループしがちだよ
 
 export function* init(action) {
   //mapconfigの作成
@@ -32,6 +39,7 @@ export function* init(action) {
       m.set('busy', false)
       .set('config', action.payload)
       .set('mapconfig',mapconfig)
+      .set('legend', require('../../data/legend.json')["bin"])
     )
   ));
 }
@@ -120,6 +128,20 @@ export function* readlogAsync(action) {
 
 }
 
+export function* selectlegendAsync(action) {
+  console.log(action.payload)
+  let contents = fs.readFileSync("./data/legend.json")
+
+  console.log(JSON.parse(contents))
+
+  yield put(actions.reducerChange(
+    (state)=> state.withMutations(m =>
+      m.set('legend', JSON.parse(contents)[action.payload])
+      .set('selecttest', action.payload)
+    )
+  ));
+}
+
 export function* readtestAsync(action) {
   let config = yield select(state => state.get("mapconfig")["config"])
   let legend = yield select(state => state.get("mapconfig")["legend"])
@@ -128,17 +150,20 @@ export function* readtestAsync(action) {
   let dst = {};
   Object.keys(wfresult).forEach((wf)=>{
     dst[wf] = {};
-    dst[wf]["title"] = `Wf${wf}`;
-    dst[wf]["config"] = config;
-    dst[wf]["legend"] = legend;
-    dst[wf]["chip"] = {}
-    let hoge = dst[wf]["chip"]
+    // dst[wf]["title"] = `Wf${wf}`;
+    // dst[wf]["config"] = config;
+    // dst[wf]["legend"] = legend;
+    // dst[wf]["chip"] = {}
+    // let hoge = dst[wf]["chip"]
+    dst[wf] = {}
+    let hoge = dst[wf]
     Object.keys(wfresult[wf]).forEach((chip)=>{
-      hoge[chip] = {};
-      hoge[chip]["x"] = wfresult[wf][chip]["x"];
-      hoge[chip]["y"] = wfresult[wf][chip]["y"];
-      hoge[chip]["value"] = wfresult[wf][chip][action.payload];
-      hoge[chip]["background"] = wfresult[wf][chip]["background"] || "auto";
+      hoge[chip] = {
+        "x" : wfresult[wf][chip]["x"],
+        "y" : wfresult[wf][chip]["y"],
+        "value" : wfresult[wf][chip][action.payload],
+        "background"  : wfresult[wf][chip]["background"],
+      };
     })
   })
 
@@ -147,10 +172,15 @@ export function* readtestAsync(action) {
   ));
 }
 
-
-
-// var f1 = fetch("/").then(e => e.text())
-// var f2 = fetch("/test.jpg").then(e => e.blob())
-// var text = yield f1
-// console.log(text.substr(0,14))
-// var blob = yield f2
+//ipc
+// ipcRenderer.on("return", (event, param) =>{
+//   actions.reducerChange(
+//     (state)=> state.withMutations(m =>
+//       m.set('config', param)
+//         .set('mapconfig', param["defaultmap"])
+//         .set('busy' : false)
+//     )
+//   )
+//   console.log(param)
+// })
+//ipcRenderer.send('async', null);

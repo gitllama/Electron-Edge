@@ -12,78 +12,135 @@ const margin = {"top": 20, "left":20,"right":3,"bottom":20}
 
 function legendCreate(code, canvas){
   let json = typeof (code) == "string"
-    ? JSON.parse(code)
-    : JSON.parse(JSON.stringify(code['legend'])); //deepcopy
+    ? JSON.parse(code)["legend"]
+    : code["legend"];//JSON.parse(JSON.stringify(code['legend'])); //deepcopy
   const offsetX = 10;
   const offsetY = 10;
   const marginY = 5;
 
-  const note = json['note']
-  const colorscale = json['colorscale']
-  delete json['note'];
-  delete json['colorscale'];
+  const note = json['note'] || []
+  const colorscale = json['colorscale'] || {}
+  const mark = json["mark"] || {}
 
-  let y_length = Object.keys(json).length + note.length;
+  // delete json['note'];
+  // delete json['colorscale'];
 
-  canvas
-    .attr('xmlns', 'http://www.w3.org/2000/svg')
-    .attr('version',  '1.1')
-    .attr("width", 200)
-    .attr("height", y_length * 15 + offsetY * 2 - marginY);
-  canvas
-    .attr('xmlns', 'http://www.w3.org/2000/svg')
-    .attr('version',  '1.1')
-    .attr("width", 200)
-    .attr("height", y_length * 15 + offsetY * 2 - marginY);
-  canvas.append("rect")
-    .attr("x", 0)
-    .attr("y",0)
-    .attr("width", 200)
-    .attr("height",y_length * 15 + offsetY * 2 - marginY)
-    .attr("stroke-width",1)
-    .attr("stroke","black")
-    .attr("fill", "none");
 
-  note.forEach((n, i) =>{
-    let hoge = canvas.append("g");
-    let y = i * (10 + marginY) + offsetY;
-    canvas.append("text")
-      .attr("x", offsetX)
-      .attr("y", y + 10/2)
-      .attr("text-anchor", "left")
-      .attr("dominant-baseline", "middle")
-      .attr("font-family","sans-serif")
-      .attr("font-size",12)
-      .text(n);
-  });
-  Object.keys(json).forEach((n, i) =>{
-    let hoge = canvas.append("g");
-    let y = (note.length + i)  * (10 + marginY) + offsetY;
-    hoge.append("rect")
+  const createBase =(cnv, h)=>{
+    cnv.attr('version', '1.1')
+      .attr('xmlns', 'http://www.w3.org/2000/svg')
+      .attr("width", 200)
+      .attr("height", h * 15 + offsetY * 2 - marginY);
+    cnv.append("rect")
+      .attr("x", 0)
+      .attr("y",0)
+      .attr("width", 200)
+      .attr("height", h * 15 + offsetY * 2 - marginY)
+      .attr("stroke-width",1)
+      .attr("stroke","black")
+      .attr("fill", "none");
+  }
+
+  const createNote =()=>{
+    note.forEach((n, i) =>{
+      let hoge = canvas.append("g");
+      let y = i * (10 + marginY) + offsetY;
+      canvas.append("text")
+        .attr("x", offsetX)
+        .attr("y", y + 10/2)
+        .attr("text-anchor", "left")
+        .attr("dominant-baseline", "middle")
+        .attr("font-family","sans-serif")
+        .attr("font-size",12)
+        .text(n);
+    });
+  }
+
+  const createMark =()=>{
+    Object.keys(mark).forEach((n, i) =>{
+      let hoge = canvas.append("g");
+      let y = (note.length + i)  * (10 + marginY) + offsetY;
+      hoge.append("rect")
       .attr("x", offsetX)
       .attr("y", y)
       .attr("width", 10)
       .attr("height", 10)
       .attr("stroke-width",1)
       .attr("stroke","black")
-      .attr("fill", json[n]["background"] || "white" );
-    hoge.append("text")
-      .attr("x", offsetX + 10 / 2)
-      .attr("y", y  + 10/2)
-      .attr("text-anchor", "middle")
-      .attr("dominant-baseline", "middle")
-      .attr("font-family","sans-serif")
-      .attr("font-size",10)
-      .text(json[n]["mark"] || "");
-    hoge.append("text")
-      .attr("x", offsetX + 10 + 10)
-      .attr("y", y  + 10/2)
-      .attr("text-anchor", "middle")
-      .attr("dominant-baseline", "middle")
-      .attr("font-family","sans-serif")
-      .attr("font-size",12)
-      .text(i);
-  });
+      .attr("fill", mark[n]["background"] || "white" );
+      hoge.append("text")
+          .attr("x", offsetX + 10 / 2)
+          .attr("y", y  + 10/2)
+          .attr("text-anchor", "middle")
+          .attr("dominant-baseline", "middle")
+          .attr("font-family","sans-serif")
+          .attr("font-size",10)
+          .text(mark[n]["mark"] || "");
+      hoge.append("text")
+          .attr("x", offsetX + 10 + 10)
+          .attr("y", y  + 10/2)
+          .attr("text-anchor", "left")
+          .attr("dominant-baseline", "middle")
+          .attr("font-family","sans-serif")
+          .attr("font-size",12)
+          .text(mark[n]["text"] || "");
+    });
+  }
+
+  const createColorScale =()=>{
+    let cell_width = 10
+    let domain = json["colorscale"]["domain"]
+    let data_set =  d3.range(
+      domain[0],
+      domain[domain.length - 1] ,
+      (domain[domain.length - 1] - domain[0]) / 10) ;
+
+      console.log(data_set)
+    let data_set2 =[domain[0], domain[domain.length - 1]]
+    let y = note.length  * (10 + marginY) + offsetY;
+    let colorScaler = d3.scaleLinear()
+      .domain(json["colorscale"]["domain"])    //　入力データ範囲：-1～1
+      .range(json["colorscale"]["range"]) //　出力色範囲： 赤―黄色―緑
+    let hoge = canvas.append("g");
+    hoge.selectAll( "rect" )
+      .data(data_set)
+      .enter()
+      .append("rect")
+      .attr("x", (d,i)=> offsetX + i*cell_width)
+      .attr("y", y)
+      .attr("width", cell_width)
+      .attr("height", 10)
+      .style("fill", (d,i) => colorScaler(d))
+    hoge.selectAll( "text" )
+      .data(data_set2)
+      .enter()
+      .append("text")
+        .attr("x", (d,i)=> offsetX + i*cell_width*10 )
+        .attr("y", (note.length + 1 + 0.5)  * (10 + marginY) + offsetY)
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("font-family","sans-serif")
+        .attr("font-size",12)
+        .text((n)=>n);
+  }
+
+  let y_length;
+  switch (json['mode']) {
+    case "mark":
+      y_length = Object.keys(mark).length + note.length;
+      createBase(canvas, y_length);
+      createNote();
+      createMark();
+      break;
+    case "colorscale":
+      y_length = 2 + note.length;
+      createBase(canvas, y_length);
+      createNote();
+      createColorScale();
+      break;
+    default:
+      break;
+  }
 }
 
 
@@ -124,7 +181,9 @@ function parse(code){
     notchside : json["config"]["notchside"],
     wfsize : json["config"]["wfsize"],
     chip : json["chip"],
-    mode : "BIN",
+
+    callback : json["callback"],
+
     f_x : ((i)=> i*json["config"]["chipSizeX"] + margin.left),
     f_y : ((i)=> i*json["config"]["chipSizeY"] + margin.top)
   }
@@ -297,13 +356,9 @@ function wfCreate(param, canvas){
 
 function chipState(param, canvas){
   let chips = Object.keys(param.chip)
-  let enableTXT = true;
   let chipmap = canvas.append("g");
 
-  let mode = null;
-  if(param.legend){
-    mode = param.legend["mode"] || null;
-  }
+  let mode = checkObject(param.legend, ["mode"]);
 
   let colorScaler;
   if(mode == "colorscale"){
@@ -311,6 +366,77 @@ function chipState(param, canvas){
       .domain(param.legend["colorscale"]["domain"])    //　入力データ範囲：-1～1
       .range(param.legend["colorscale"]["range"]) //　出力色範囲： 赤―黄色―緑
   }
+
+  const fillColor =(n)=>{
+    if(param.chip[n]["background"]){
+      return param.chip[n]["background"]
+    }else{
+      switch(mode){
+        case "mark":
+          return checkObject(
+            param.legend,
+            ["mark", param.chip[n]["value"], "background"]
+          ) || "lightgray";
+        case "colorscale":
+          return colorScaler(parseFloat(param.chip[n]["value"]));
+        default:
+          return "lightgray"
+      }
+    }
+  }
+  const addMark =(d, n)=> {
+    d.append("text")
+      .attr("x", param.f_x(param.chip[n]["x"]+0.5))
+      .attr("y", param.f_y(param.chip[n]["y"]+0.5))
+      .attr("text-anchor", "middle")
+      .attr("dominant-baseline", "middle")
+      .attr("font-family","sans-serif")
+      .attr("font-size",12)
+      .text(checkObject(param.legend, ["mark",param.chip[n]["value"],"mark"]) || "");
+  }
+  const addText =(d, n)=>{
+    d.append("text")
+      .attr("x", param.f_x(param.chip[n]["x"]+0.5))
+      .attr("y", param.f_y(param.chip[n]["y"]+0.5))
+      .attr("text-anchor", "middle")
+      .attr("dominant-baseline", "middle")
+      .attr("font-family","sans-serif")
+      .attr("font-size",12)
+      .text(param.chip[n]["value"] || "");
+  }
+
+  chips.forEach((n)=>{
+    let hoge = chipmap.append("g")
+      .on("click",()=> param.callback(n))
+    // .on("mouseover", ()=>d3.select( ".tooltip" ).attr("visibility", "visible").text(param.chip[n]["value"] || ""))
+    // .on("mouseout", ()=>d3.select( ".tooltip" ).attr("visibility", "hidden"))
+    //   .on("mouseover", function(){
+    //     d3.select(this) // マウスに重なった要素を選択
+    //       .attr("style", "fill:rgb(0,0,255)");
+    // })
+    // .on("mouseout", function(){
+    //   d3.select(this) // マウスに重なっていた要素を選択
+    //       .attr("style", "fill:rgb(255,0,0)");
+    // })
+    hoge.append("rect")
+        .attr("x", param.f_x(param.chip[n]["x"]))
+        .attr("y", param.f_y(param.chip[n]["y"]))
+        .attr("width", param.chipSizeX)
+        .attr("height", param.chipSizeY)
+        .attr("stroke-width",1)
+        .attr("stroke","black")
+        .attr("fill", fillColor(n))
+        .append("title")
+        .text(param.chip[n]["value"] || "");
+    if(param.legend["text"])
+      addText(hoge, n);
+    else if(mode == "mark")
+      addMark(hoge, n);
+  })
+
+
+/*
+
 
   chipmap.selectAll("rect")
     .data(chips)
@@ -326,7 +452,7 @@ function chipState(param, canvas){
       if(param.chip[n]["background"]){
         return param.chip[n]["background"]
       }else{
-        switch(param["legend"]["mode"]){
+        switch(mode){
           case "mark":
             return checkObject(
               param.legend,
@@ -342,7 +468,7 @@ function chipState(param, canvas){
     .append("title")
     .text((n)=> param.chip[n]["value"] || "");
 
-  if(enableTXT){
+  if(checkObject(param.legend, ["text"])){
     chipmap.selectAll("TEXT")
     	.data(chips)
     	.enter()
@@ -355,7 +481,7 @@ function chipState(param, canvas){
       .attr("font-size",12)
       .text((n)=> param.chip[n]["value"] || "");
   }
-
+*/
 }
 
 
@@ -374,8 +500,10 @@ function cautionCreate(param, canvas, txt){
     .attr("font-family","sans-serif")
     .attr("fill","red")
     .attr("font-size",32)
-    .text(txt);
+    .text(txt)
+    .attr("transform",`rotate(-10,${cx},${cy})`);
 }
+
 
 //------------------------------
 
@@ -406,9 +534,6 @@ function render(code, node) {
     gridCreate(param, canvas);
     directionCreate(param, canvas);
     chipState(param, canvas);
-  }else{
-    cautionCreate(param, canvas, "No Wf")
-    //cautionCreate(param, canvas, "")
   }
 
   if(param["caution"])

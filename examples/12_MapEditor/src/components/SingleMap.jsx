@@ -20,24 +20,62 @@ class App extends React.Component {
   }
   drawWfMap(){
     const node = this.node
-    const mapconfig = this.props.state.get("mapconfig");
-    const lotstate = this.props.state.get("wfmap") || {};
-    const wfstate = lotstate[this.props.wfno];
+
+    const mapconfig = this.props.state.get("mapconfig")["config"];
+    const legend = this.props.state.get("legend");
+    let wf = (this.props.state.get("wfmap") || {})[this.props.wfno];
 
     switch(this.props.mode){
       case "LEGEND":
-        wfmap.renderLegend(mapconfig, node)
+        this.createLegend(node)
+        break;
+      case "SELECTABLE":
+        this.createSelectable(node)
         break;
       default:
-        //configとmapのマージ
-        if(wfstate){
-          wfmap.render(wfstate, node)
-        } else {
-          wfmap.render(mapconfig, node)
-        }
+        this.createDefault(node)
         break;
     }
 
+  }
+  createLegend(node){
+    wfmap.renderLegend(
+      {
+        "config" : this.props.state.get("mapconfig")["config"],
+        "legend" : this.props.state.get("legend")
+      }, node)
+  }
+  createSelectable(node){
+    const wf = (this.props.state.get("wfmap") || {})[this.props.wfno];
+    const selected = (this.props.state.get("selectchip") || {})[this.props.wfno] || {};
+    if(wf){
+      Object.keys(wf).forEach((v)=>{
+        if(wf[v]["value"])
+          wf[v]["value"] = selected[v] ? "0" : wf[v]["value"]
+      })
+      wfmap.render(
+        {
+          "title" : `${this.props.lotno}-${this.props.wfno}`,
+          "caution" : wf ? null : "No Wf",
+          "config" :  this.props.state.get("mapconfig")["config"],
+          "legend" : this.props.state.get("legend"),
+          "chip" : wf,
+          "callback" : this.props.callback
+        }, node)
+    }else{
+      this.createDefault(node)
+    }
+  }
+  createDefault(node){
+    let wf = (this.props.state.get("wfmap") || {})[this.props.wfno];
+    wfmap.render(
+      {
+        "title" : `${this.props.lotno}-${this.props.wfno}`,
+        "caution" : wf ? null : "No Wf",
+        "config" :  this.props.state.get("mapconfig")["config"],
+        "legend" : this.props.state.get("legend"),
+        "chip" : wf
+      }, node)
   }
   render() {
     return <svg ref={node => this.node = node}></svg>

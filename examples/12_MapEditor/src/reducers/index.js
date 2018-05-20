@@ -8,11 +8,15 @@ const initialState = Immutable.Map({
   html : null,
 
   mapconfig : null,
+  legend : null,
   wfresult : null,
   wfmap : null,
+  selectchip : { "1":{ "1" :true } },
+
   lotno : "0001(AS5045)",
-  wfselect : [1,2,3],
-  wfviewmode : "TXT | BIN"
+  wfselect : [1],
+  wfviewmode : "TXT | BIN",
+  selecttest : "bin"
 });
 
 const reducers = {
@@ -20,9 +24,6 @@ const reducers = {
     action.payload(state)
   )
 };
-// .set('config', param)
-//   .set('mapconfig', param["defaultmap"])
-//
 
 export default function reducer(state = initialState, action) {
   console.log("reducer", action.type)

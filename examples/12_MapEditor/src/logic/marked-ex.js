@@ -29,7 +29,8 @@ export function markdownCreate(code){
   //                  '"><span class="header-link"></span></a>' +
   //                   text + '</h' + level + '>';
   // },
-  let highlight = function(code, lang, callback){
+
+  let highlight =(code, lang, callback)=>{
     let dst;
     try {
       switch(lang){
@@ -84,31 +85,11 @@ export function mermaidCreate(path){
   } catch(error) {
     svg = "<p>err</p>";
   }
+
+  //装飾追加
+  // dst = dst.replace(
+  //   'class="sectionTitle sectionTitle0"',
+  //   'class="sectionTitle sectionTitle0" stroke="red"');
+
   return svg;
 }
-
-// var time = new Date().getTime();
-// while (new Date().getTime() < time + 10000);
-
-//let state = yield select();
-//let code = state.get("mermaid")
-//let code = yield select(state => state.get("mermaid"))
-
-// yield call(
-//   (e) => {
-//     try {
-//       mermaid.mermaidAPI.render(
-//         "id" + count++,
-//         e,
-//         (svgCode)=>( dst = svgCode )
-//       )
-//     } catch(error) {
-//       dst = "<p>w</p>";
-//     }
-//   }, code
-// );
-
-//装飾追加
-// dst = dst.replace(
-//   'class="sectionTitle sectionTitle0"',
-//   'class="sectionTitle sectionTitle0" stroke="red"');

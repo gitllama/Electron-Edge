@@ -31,8 +31,6 @@ const bodycss = {
   "height": `${296 - header_height - footer_height}mm`
 }
 const footercss =  {
-  // "borderWidth":"1px",
-  // "borderStyle":"solid",
   "left":"0mm",
   "width" : "210mm",
   "top" : `${296 - footer_height}mm`,
@@ -46,21 +44,10 @@ const mapline = {
 
 function GetDateNow(){
   const now = new Date();
-
   const y = now.getFullYear();
-  const m = now.getMonth() + 1;
-  const d = now.getDate();
-  const w = now.getDay();
-
-
-  // var wNames = ['日', '月', '火', '水', '木', '金', '土'];
-  // // 「月」と「日」で1桁だったときに頭に 0 をつける
-  // if (m < 10) {
-  //   m = '0' + m;
-  // }
-  // if (d < 10) {
-  //   d = '0' + d;
-  // }
+  const m = ("00" + (now.getMonth()+1)).slice(-2);
+  const d = ("00" + now.getDate()).slice(-2);
+  const w = ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'][now.getDay()];
 
   return `${y}-${m}-${d}`;
 }

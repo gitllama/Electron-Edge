@@ -31,10 +31,3 @@ exports.clickViewMenu = function(mainWindow, item){
   item.checked = true;
   mainWindow.webContents.send("VIEW_CHANGE", item.label);
 }
-
-// this.printWindow = new BrowserWindow({
-//   width: 800,
-//   height: 600,
-// });
-// this.printWindow.loadURL(`file://${path.join(__dirname, '../renderer/print.html')}`);
-// this.printWindow.on('closed', () => { this.printWindow = null; });

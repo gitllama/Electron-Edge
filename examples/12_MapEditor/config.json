@@ -29,34 +29,6 @@
       "notch" : 9,
       "notchside" : 0
     },
-    "legend" : {
-      "colorscale" : {
-        "domain" : [1,2,3],
-        "range" : ["green","yellow","red"]
-      },
-      "note" : [
-        "NOTCH   : right",
-        "ShotNum : 54"
-      ],
-      "1" : {
-        "text" : "組立",
-        "mark" : "o",
-        "color" : "red",
-        "background" : "gray"
-      },
-      "2" : {
-        "text" : "組立済",
-        "mark" : "x",
-        "color" : "red",
-        "background" : "white"
-      },
-      "3" : {
-        "text" : "未組立",
-        "mark" : "△",
-        "color" : "red",
-        "background" : "lightgray"
-      }
-    },
     "effective": {
       "1" : {"y" : 1, "x": 3, "wt": 22},
       "2" : {"y" : 1, "x": 4, "wt": 23},
