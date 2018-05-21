@@ -4,7 +4,8 @@ const initialState = Immutable.Map({
   busy : true,
 
   config : null,
-  view : "MAIN",
+  view : "Editor",
+  text : "# markdown",
   html : null
 });
 

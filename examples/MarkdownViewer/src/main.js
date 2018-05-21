@@ -8,8 +8,6 @@ const configJson = require('../config.json');
 const ml = require('./mainlogic.js');
 
 
-
-
 app.on('ready', function() {
   createWindow()
 });
@@ -97,17 +95,6 @@ function createMenu() {
           }
         },
         {
-          label: 'DatalogDirectoryOpen',
-          click () {
-            let dst = electron.dialog.showOpenDialog(null, {
-                properties: ['openDirectory'], //multiSelections
-                title: 'DatalogDirectoryOpen',
-                defaultPath: '.'
-            });
-            mainWindow.webContents.send("READLOG_ASYNCLATEST", dst);
-          }
-        },
-        {
           label: 'PrintPDF',
           accelerator: 'Ctrl+P',
           click () { ml.printpdf(mainWindow); }
@@ -117,15 +104,25 @@ function createMenu() {
     {
       label: 'View',
       submenu: [
-        { label: 'MAIN',
+        {
+          label: 'Editor',
           type: 'checkbox',
           checked: true,
           click (i) { ml.clickViewMenu(mainWindow, i); }
-        },{ label: 'A4',
+        },
+        {
+          label: 'Split',
+          type: 'checkbox',
+          checked: false,
+          click (i) { ml.clickViewMenu(mainWindow, i); }
+        },
+        {
+          label: 'A4',
           type: 'checkbox',
           checked: false,
           click (i) { ml.clickViewMenu(mainWindow, i); }
         }
+
       ]
     }
   ]));

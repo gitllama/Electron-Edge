@@ -5,7 +5,9 @@ import actions from '../actions'
 import Immutable from 'immutable'
 const {webFrame} = require('electron')
 
+import Editor from './Editor.jsx'
 import A4 from './A4.jsx'
+import Split from './Split.jsx'
 
 const loadimgstyle = {
   "position": "absolute",
@@ -15,6 +17,7 @@ const loadimgstyle = {
   "right":"0",
   "margin": "auto"
 }
+
 
 class App extends React.Component {
   constructor(props) {
@@ -35,12 +38,14 @@ class App extends React.Component {
   render() {
     const viewselector =(i)=>{
       switch(i){
-        case "MAIN":
-          return ( <div>{"MAIN"}</div> );
+        case "Editor":
+          return ( <Editor/> );
+        case "Split":
+          return ( <Split /> );
         case "A4":
           return ( <A4 /> );
         default:
-          return (  <div>{"ERR"}</div> );
+          return ( <div>ERR</div> );
       }
     }
     const busycheck =(i)=>{

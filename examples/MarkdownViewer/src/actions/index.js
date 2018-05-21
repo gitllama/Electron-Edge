@@ -5,6 +5,7 @@ export default createActions(
   'REDUCER_CHANGE',
 
   'VIEW_CHANGE',
+  'CHANGE_TEXT',
   'SELECT_LEGEND_ASYNCLATEST',
 
   'READWELCOME_ASYNCLATEST',

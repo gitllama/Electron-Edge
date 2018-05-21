@@ -14,6 +14,7 @@ export function* init(action) {
     (state)=> state.withMutations(m =>
       m.set('busy', false)
       .set('config', action.payload)
+      .set('text', fs.readFileSync('dummy.md').toString())
     )
   ));
 }

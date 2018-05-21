@@ -16,6 +16,11 @@ const takeSagas = {
     ))
   ),
 
+  ['CHANGE_TEXT'] : (state, action) => (
+    state.withMutations(m => (
+      m.set('text', action.payload)
+    ))
+  ),
   // ['SELECT_LEGEND_ASYNCLATEST'] : g.selectlegendAsync,
   //
   // ['READWELCOME_ASYNCLATEST'] : g.markdownAsync,

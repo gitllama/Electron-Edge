@@ -70,27 +70,16 @@ function header(i, maxpage){
 
 function footer(){
   return (
-    <div style={footercss}>
-      <div style={mapline}>
-        <div>
-        </div>
-        <div>
-        </div>
-        <div>
-          <font color="red" align="right">CONFIDENTIAL</font>
-        </div>
+    <div style={mapline}>
+      <div></div>
+      <div></div>
+      <div>
+        <font color="red" align="right">CONFIDENTIAL</font>
       </div>
     </div>
   );
 }
 
-const dummycontents = markedex.markdownCreate(
-  fs.readFileSync('dummy.md').toString()
-);
-
-function body(v){
-  return (<div dangerouslySetInnerHTML={{__html: v}} />)
-}
 
 class App extends React.Component {
   constructor(props) {
@@ -98,14 +87,15 @@ class App extends React.Component {
   }
   render() {
     const pages = [];
-    dummycontents.forEach((v,i)=>{
+    let hoge = markedex.markdownCreate(this.props.state.get("text"), true);
+    hoge.forEach((v,i)=>{
       pages.push(
         <section key={i} style={sectioncss}>
-        <div style={{"position" : "relative"}}>
-        {header(parseInt(i)+1, dummycontents.length)}
-        <div style={bodycss}>{body(v)}</div>
-        {footer()}
-        </div>
+          <div style={{"position" : "relative"}}>
+            {header(parseInt(i)+1, hoge.length)}
+            <div style={bodycss} dangerouslySetInnerHTML={{__html: v}} />
+            <div style={footercss}>{footer()}</div>
+          </div>
         </section>
       );
     })

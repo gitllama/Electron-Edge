@@ -16,7 +16,7 @@ mermaid.mermaidAPI.initialize({
   }
 });
 
-export function markdownCreate(code){
+export function markdownCreate(code, split){
 
   let renderer = new marked.Renderer();
 /*
@@ -59,7 +59,10 @@ export function markdownCreate(code){
         tables: true,
         breaks: true,
         sanitize: false
-    })
+    });
 
-  return mark.split("<hr>");
+  if(split)
+    return mark.split("<hr>");
+  else
+    return mark;
 }
