@@ -1,10 +1,11 @@
 {
   "name": "MarkdownViewer",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron . -D"
+    "start": "electron . -D",
+    "pkg": ".\\node_modules\\.bin\\electron-packager . MarkdownEditor --platform=win32 --arch=all --electron-version=2.0.1"
   },
   "repository": "",
   "keywords": [],
@@ -28,7 +29,6 @@
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
     "d3": "^5.2.0",
-    "electron": "^2.0.0",
     "immutable": "^3.8.2",
     "marked": "^0.3.19",
     "mermaid": "^8.0.0-rc.8",
@@ -40,5 +40,9 @@
     "redux": "^4.0.0",
     "redux-actions": "^2.3.2",
     "redux-saga": "^0.16.0"
+  },
+  "devDependencies": {
+    "electron": "^2.0.0",
+    "electron-packager": "^12.1.0"
   }
 }
