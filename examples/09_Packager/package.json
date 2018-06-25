@@ -1,0 +1,47 @@
+{
+  "name": "packeger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "electron . -D",
+    "build-main": "webpack --env.prod --env.main",
+    "build-render": "webpack --env.prod",
+    "pkg": ".\\node_modules\\.bin\\electron-packager . packeger --platform=win32 --arch=all --electron-version=2.0.1 --ignore=\"^/src\" --overwrite",
+    "pkg-asar": ".\\node_modules\\.bin\\electron-packager . packeger --platform=win32 --arch=all --electron-version=2.0.1 --prune --overwrite --asar"
+  },
+  "repository": "",
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "8.9.3"
+          }
+        }
+      ],
+      "react"
+    ]
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "electron": "^2.0.0",
+    "electron-packager": "^12.1.0",
+    "immutable": "^3.8.2",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-actions": "^2.3.2",
+    "redux-saga": "^0.16.0",
+    "webpack": "^4.12.1",
+    "webpack-cli": "^2.0.11"
+  }
+}
