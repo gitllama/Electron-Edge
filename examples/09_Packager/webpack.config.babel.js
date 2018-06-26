@@ -4,11 +4,12 @@ export default (env) => {
   const MAIN = env && env.main
   const PROD = env && env.prod
   return {
+    mode : "production",
     target: MAIN ? 'electron-main' : 'electron-renderer',
-    entry: MAIN ? './src/main.js' : './src/index.jsx',
+    entry: MAIN ? './src/main/main.js' : './src/render/index.jsx',
     output: {
       path: PROD ? `${__dirname}/dist` : `${__dirname}/dist/src`,
-      filename: MAIN ? 'main.js' : 'index.js'
+      filename: MAIN ? 'main/main.js' : 'render/index.js'
     },
     devtool: PROD ? '' : 'source-map',
     node: {
