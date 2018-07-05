@@ -1,0 +1,15 @@
+{
+  "window" : {
+    "width" : 800,
+    "height" : 600
+  },
+  "shortcut" : {
+    "global" : {
+      "ctrl+u" : "SHORTCUT_INC",
+      "ctrl+i" : "SHORTCUT_INC"
+    },
+    "main" : {
+
+    }
+  }
+}

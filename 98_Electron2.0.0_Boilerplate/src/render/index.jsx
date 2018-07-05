@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga';
+import {ipcRenderer} from 'electron';
 
-import App from './components/App';
 import reducer from './reducers'
 import rootSaga  from './sagas'
 import actions from './actions'
+
+import App from './components/App.jsx';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(sagaMiddleware))
 sagaMiddleware.run(rootSaga)
 
-
-const ipcRenderer = require("electron").ipcRenderer;
 Object.keys(actions).forEach((key)=>{
   ipcRenderer.on(actions[key].toString(), (event, param) =>{
     store.dispatch({
@@ -23,7 +23,6 @@ Object.keys(actions).forEach((key)=>{
     });
   })
 });
-
 
 ReactDOM.render(
   <Provider store={store}>
