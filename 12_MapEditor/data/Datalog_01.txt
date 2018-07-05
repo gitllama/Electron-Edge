@@ -1,0 +1,1149 @@
+Datalog report
+05/08/2018 11:05:36
+      Prog Name:    Main.xlsm
+       Job Name:    Main.xlsm
+            Lot:
+       Operator:    Administrator
+      Test Mode:
+      Node Name:    IP750_CB7E
+      Part Type:
+    Channel map:    Channel Map
+    Environment:
+
+    Site Number:
+         0
+
+    Device#: 1
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0       N/A         1
+=========================================================================
+    Device#: 2
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         2
+=========================================================================
+    Device#: 3
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 4
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 5
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 6
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 7
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 8
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 9
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 10
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 11
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 12
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 13
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 14
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 15
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         3
+=========================================================================
+    Device#: 16
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 17
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 18
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 19
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 20
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 21
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 22
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 23
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 24
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 25
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 26
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 27
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 28
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 29
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 30
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 31
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 32
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 33
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 34
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 35
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 36
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 37
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 38
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 39
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 40
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 41
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 42
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 43
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 44
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 45
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 46
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 47
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 48
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 49
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 50
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 51
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 52
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 53
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
+    Device#: 54
+
+    5/8/2018 11:05:36 AM
+
+    Wf :
+    Coord : X:00 Y:00
+
+ Number     Site  Result   Test Name                 Pin            Channel   Low            Measured       High           Force          Loc
+ 0           0    PASS     OS_Pch                    AV22           9         100.0000 mV    1.0562 V       1.2000 V       100.0000 uA    0
+ 1           0    PASS     OS_Pch                    AV33SFVDD      18        100.0000 mV    435.0000 mV    1.2000 V       100.0000 uA    0
+ 2           0    FAIL     OS_Pch                    VDDCELL        3         100.0000 mV    442.1875 mV    1.2000 V       100.0000 uA    0
+ 3           0    PASS     OS_Pch                    RSL            41        100.0000 mV    423.8751 mV    1.2000 V       100.0000 uA    0
+
+ Site Failed tests/Executed tests
+------------------------------------
+    0        54       193
+
+ Site    Sort     Bin
+------------------------------------
+    0         2         1
+=========================================================================
