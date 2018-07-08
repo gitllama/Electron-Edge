@@ -7,11 +7,9 @@
     "start": "node main.js"
   },
   "repository": "",
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "",
   "license": "",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {}
 }
