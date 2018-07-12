@@ -1,0 +1,18 @@
+{
+  "window" : {
+    "width" : 800,
+    "height" : 600,
+    "devTool" : true
+  },
+  "shortcut" : {
+    "global" : {
+    },
+    "main" : {
+    }
+  },
+  "ftp":{
+    "host": "xxx.xxx.xxx.xxx",
+    "username": "xxx",
+    "password": "xxx"
+  }
+}
